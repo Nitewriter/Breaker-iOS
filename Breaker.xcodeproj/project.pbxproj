@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BD2F757E143E86710009C491 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F757D143E86710009C491 /* UIKit.framework */; };
+		BD2F7580143E86710009C491 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F757F143E86710009C491 /* Foundation.framework */; };
+		BD2F7582143E86710009C491 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F7581143E86710009C491 /* CoreGraphics.framework */; };
+		BD5E5FFD143F4FB4007D1FCB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5E5FFA143F4FB4007D1FCB /* Default@2x.png */; };
+		BD5E5FFE143F4FB4007D1FCB /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5E5FFB143F4FB4007D1FCB /* Icon.png */; };
+		BD5E5FFF143F4FB4007D1FCB /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5E5FFC143F4FB4007D1FCB /* Icon@2x.png */; };
+		BD7AE7C5143F4E0E00F12BC5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD7AE7B8143F4E0E00F12BC5 /* InfoPlist.strings */; };
+		BD7AE7C6143F4E0E00F12BC5 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7AE7BB143F4E0E00F12BC5 /* GameView.m */; };
+		BD7AE7C7143F4E0E00F12BC5 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7AE7BD143F4E0E00F12BC5 /* GameViewController.m */; };
+		BD7AE7C8143F4E0E00F12BC5 /* GVLivesView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7AE7BF143F4E0E00F12BC5 /* GVLivesView.m */; };
+		BD7AE7C9143F4E0E00F12BC5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BD7AE7C0143F4E0E00F12BC5 /* LICENSE */; };
+		BD7AE7CA143F4E0E00F12BC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7AE7C1143F4E0E00F12BC5 /* main.m */; };
+		BD7AE7CB143F4E0E00F12BC5 /* BreakerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7AE7C3143F4E0E00F12BC5 /* BreakerAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BD2F7579143E86710009C491 /* Breaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD2F757D143E86710009C491 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BD2F757F143E86710009C491 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BD2F7581143E86710009C491 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BD5E5FFA143F4FB4007D1FCB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = SOURCE_ROOT; };
+		BD5E5FFB143F4FB4007D1FCB /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = SOURCE_ROOT; };
+		BD5E5FFC143F4FB4007D1FCB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		BD7AE7B6143F4E0E00F12BC5 /* Breaker-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Breaker-Info.plist"; sourceTree = "<group>"; };
+		BD7AE7B7143F4E0E00F12BC5 /* Breaker-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Breaker-Prefix.pch"; sourceTree = "<group>"; };
+		BD7AE7B9143F4E0E00F12BC5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BD7AE7BA143F4E0E00F12BC5 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
+		BD7AE7BB143F4E0E00F12BC5 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		BD7AE7BC143F4E0E00F12BC5 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		BD7AE7BD143F4E0E00F12BC5 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		BD7AE7BE143F4E0E00F12BC5 /* GVLivesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVLivesView.h; sourceTree = "<group>"; };
+		BD7AE7BF143F4E0E00F12BC5 /* GVLivesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVLivesView.m; sourceTree = "<group>"; };
+		BD7AE7C0143F4E0E00F12BC5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		BD7AE7C1143F4E0E00F12BC5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BD7AE7C2143F4E0E00F12BC5 /* BreakerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakerAppDelegate.h; sourceTree = "<group>"; };
+		BD7AE7C3143F4E0E00F12BC5 /* BreakerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakerAppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BD2F7576143E86710009C491 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD2F757E143E86710009C491 /* UIKit.framework in Frameworks */,
+				BD2F7580143E86710009C491 /* Foundation.framework in Frameworks */,
+				BD2F7582143E86710009C491 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BD2F756E143E86710009C491 = {
+			isa = PBXGroup;
+			children = (
+				BD7AE7B5143F4E0E00F12BC5 /* Breaker */,
+				BD2F757C143E86710009C491 /* Frameworks */,
+				BD2F757A143E86710009C491 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BD2F757A143E86710009C491 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BD2F7579143E86710009C491 /* Breaker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BD2F757C143E86710009C491 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD2F757D143E86710009C491 /* UIKit.framework */,
+				BD2F757F143E86710009C491 /* Foundation.framework */,
+				BD2F7581143E86710009C491 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD5E5FF6143F4F62007D1FCB /* Game View */ = {
+			isa = PBXGroup;
+			children = (
+				BD5E5FF7143F4F75007D1FCB /* Subviews */,
+				BD7AE7BA143F4E0E00F12BC5 /* GameView.h */,
+				BD7AE7BB143F4E0E00F12BC5 /* GameView.m */,
+				BD7AE7BC143F4E0E00F12BC5 /* GameViewController.h */,
+				BD7AE7BD143F4E0E00F12BC5 /* GameViewController.m */,
+			);
+			name = "Game View";
+			sourceTree = "<group>";
+		};
+		BD5E5FF7143F4F75007D1FCB /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				BD7AE7BE143F4E0E00F12BC5 /* GVLivesView.h */,
+				BD7AE7BF143F4E0E00F12BC5 /* GVLivesView.m */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
+		BD5E5FF8143F4F84007D1FCB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BD5E5FF9143F4FA4007D1FCB /* Assets */,
+				BD7AE7B6143F4E0E00F12BC5 /* Breaker-Info.plist */,
+				BD7AE7B7143F4E0E00F12BC5 /* Breaker-Prefix.pch */,
+				BD7AE7B8143F4E0E00F12BC5 /* InfoPlist.strings */,
+				BD7AE7C0143F4E0E00F12BC5 /* LICENSE */,
+				BD7AE7C1143F4E0E00F12BC5 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BD5E5FF9143F4FA4007D1FCB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				BD5E5FFA143F4FB4007D1FCB /* Default@2x.png */,
+				BD5E5FFB143F4FB4007D1FCB /* Icon.png */,
+				BD5E5FFC143F4FB4007D1FCB /* Icon@2x.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		BD7AE7B5143F4E0E00F12BC5 /* Breaker */ = {
+			isa = PBXGroup;
+			children = (
+				BD5E5FF8143F4F84007D1FCB /* Supporting Files */,
+				BD5E5FF6143F4F62007D1FCB /* Game View */,
+				BD7AE7C2143F4E0E00F12BC5 /* BreakerAppDelegate.h */,
+				BD7AE7C3143F4E0E00F12BC5 /* BreakerAppDelegate.m */,
+			);
+			path = Breaker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BD2F7578143E86710009C491 /* Breaker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD2F7594143E86710009C491 /* Build configuration list for PBXNativeTarget "Breaker" */;
+			buildPhases = (
+				BD2F7575143E86710009C491 /* Sources */,
+				BD2F7576143E86710009C491 /* Frameworks */,
+				BD2F7577143E86710009C491 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Breaker;
+			productName = Pong;
+			productReference = BD2F7579143E86710009C491 /* Breaker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BD2F7570143E86710009C491 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = BD2F7573143E86710009C491 /* Build configuration list for PBXProject "Breaker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BD2F756E143E86710009C491;
+			productRefGroup = BD2F757A143E86710009C491 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BD2F7578143E86710009C491 /* Breaker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BD2F7577143E86710009C491 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD7AE7C5143F4E0E00F12BC5 /* InfoPlist.strings in Resources */,
+				BD7AE7C9143F4E0E00F12BC5 /* LICENSE in Resources */,
+				BD5E5FFD143F4FB4007D1FCB /* Default@2x.png in Resources */,
+				BD5E5FFE143F4FB4007D1FCB /* Icon.png in Resources */,
+				BD5E5FFF143F4FB4007D1FCB /* Icon@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BD2F7575143E86710009C491 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD7AE7C6143F4E0E00F12BC5 /* GameView.m in Sources */,
+				BD7AE7C7143F4E0E00F12BC5 /* GameViewController.m in Sources */,
+				BD7AE7C8143F4E0E00F12BC5 /* GVLivesView.m in Sources */,
+				BD7AE7CA143F4E0E00F12BC5 /* main.m in Sources */,
+				BD7AE7CB143F4E0E00F12BC5 /* BreakerAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BD7AE7B8143F4E0E00F12BC5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD7AE7B9143F4E0E00F12BC5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BD2F7592143E86710009C491 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BD2F7593143E86710009C491 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BD2F7595143E86710009C491 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Breaker/Breaker-Prefix.pch";
+				INFOPLIST_FILE = "Breaker/Breaker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = Breaker;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BD2F7596143E86710009C491 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Breaker/Breaker-Prefix.pch";
+				INFOPLIST_FILE = "Breaker/Breaker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = Breaker;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BD2F7573143E86710009C491 /* Build configuration list for PBXProject "Breaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD2F7592143E86710009C491 /* Debug */,
+				BD2F7593143E86710009C491 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD2F7594143E86710009C491 /* Build configuration list for PBXNativeTarget "Breaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD2F7595143E86710009C491 /* Debug */,
+				BD2F7596143E86710009C491 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BD2F7570143E86710009C491 /* Project object */;
+}

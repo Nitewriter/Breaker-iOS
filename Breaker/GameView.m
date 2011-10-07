@@ -1,6 +1,6 @@
 //
 //  GameView.m
-//  Pong
+//  Breaker
 //
 //  Created by Joel Garrett on 10/6/11.
 //  Copyright 2011 Joel Garrett. All rights reserved.

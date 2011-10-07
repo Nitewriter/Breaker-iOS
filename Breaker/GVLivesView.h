@@ -1,6 +1,6 @@
 //
 //  GVLivesView.h
-//  Pong
+//  Breaker
 //
 //  Created by Joel Garrett on 10/7/11.
 //  Copyright 2011 Joel Garrett. All rights reserved.

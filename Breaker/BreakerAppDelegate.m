@@ -1,15 +1,15 @@
 //
-//  PongAppDelegate.m
-//  Pong
+//  BreakerAppDelegate.m
+//  Breaker
 //
 //  Created by Joel Garrett on 10/6/11.
 //  Copyright 2011 Joel Garrett. All rights reserved.
 //
 
-#import "PongAppDelegate.h"
+#import "BreakerAppDelegate.h"
 #import "GameViewController.h"
 
-@implementation PongAppDelegate
+@implementation BreakerAppDelegate
 
 @synthesize window = _window;
 

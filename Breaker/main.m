@@ -1,6 +1,6 @@
 //
 //  main.m
-//  Pong
+//  Breaker
 //
 //  Created by Joel Garrett on 10/6/11.
 //  Copyright 2011 Joel Garrett. All rights reserved.
@@ -11,7 +11,7 @@
 int main(int argc, char *argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, @"PongAppDelegate");
+    int retVal = UIApplicationMain(argc, argv, nil, @"BreakerAppDelegate");
     [pool release];
     return retVal;
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		BD145F6B143EB7E400F9111A /* GVLivesView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD145F6A143EB7E400F9111A /* GVLivesView.m */; };
+		BD145F6D143ED90800F9111A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD145F6C143ED90800F9111A /* Default@2x.png */; };
+		BD145F70143EDA7B00F9111A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BD145F6E143EDA7B00F9111A /* Icon.png */; };
+		BD145F71143EDA7B00F9111A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD145F6F143EDA7B00F9111A /* Icon@2x.png */; };
 		BD2F757E143E86710009C491 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F757D143E86710009C491 /* UIKit.framework */; };
 		BD2F7580143E86710009C491 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F757F143E86710009C491 /* Foundation.framework */; };
 		BD2F7582143E86710009C491 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F7581143E86710009C491 /* CoreGraphics.framework */; };
@@ -21,6 +24,9 @@
 /* Begin PBXFileReference section */
 		BD145F69143EB7E400F9111A /* GVLivesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVLivesView.h; sourceTree = "<group>"; };
 		BD145F6A143EB7E400F9111A /* GVLivesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVLivesView.m; sourceTree = "<group>"; };
+		BD145F6C143ED90800F9111A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		BD145F6E143EDA7B00F9111A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = SOURCE_ROOT; };
+		BD145F6F143EDA7B00F9111A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		BD2F7579143E86710009C491 /* Pong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD2F757D143E86710009C491 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BD2F757F143E86710009C491 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,6 +106,9 @@
 		BD2F7584143E86710009C491 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BD145F6E143EDA7B00F9111A /* Icon.png */,
+				BD145F6F143EDA7B00F9111A /* Icon@2x.png */,
+				BD145F6C143ED90800F9111A /* Default@2x.png */,
 				BD2F7585143E86710009C491 /* Pong-Info.plist */,
 				BD2F7586143E86710009C491 /* InfoPlist.strings */,
 				BD2F7589143E86710009C491 /* main.m */,
@@ -177,6 +186,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD2F7588143E86710009C491 /* InfoPlist.strings in Resources */,
+				BD145F6D143ED90800F9111A /* Default@2x.png in Resources */,
+				BD145F70143EDA7B00F9111A /* Icon.png in Resources */,
+				BD145F71143EDA7B00F9111A /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

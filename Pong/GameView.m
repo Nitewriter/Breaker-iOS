@@ -13,6 +13,7 @@
 @interface GameView ()
 
 - (NSMutableArray *)newBricks;
+- (void)applyEarnedPoints:(NSUInteger)points;
 
 @end
 
@@ -33,10 +34,12 @@
         // Initialization code
         _ballMovement = CGPointMake(4.0, 4.0);
         _score = 0;
+        _bonus = _score;
         
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
         
         _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(170.0, 0.0, 140.0, 30.0)];
+        [self.scoreLabel setBackgroundColor:self.backgroundColor];
         [self.scoreLabel setTextColor:[UIColor blackColor]];
         [self.scoreLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
         [self.scoreLabel setTextAlignment:UITextAlignmentRight];
@@ -50,11 +53,13 @@
         _ball = [[UIView alloc] initWithFrame:CGRectMake(80.0, 340.0, 10.0, 10.0)];
         [self.ball setBackgroundColor:[UIColor blackColor]];
         [self.ball.layer setCornerRadius:CGRectGetMidX(self.ball.bounds)];
+        [self.ball.layer setShouldRasterize:YES];
         [self addSubview:self.ball];
         
         _playerPaddle = [[UIView alloc] initWithFrame:CGRectMake(120.0, 420.0, 60.0, 10.0)];
         [self.playerPaddle setBackgroundColor:[UIColor grayColor]];
         [self.playerPaddle.layer setCornerRadius:4.0];
+        [self.playerPaddle.layer setShouldRasterize:YES];
         [self addSubview:self.playerPaddle];
         
         _bricks = [[NSMutableArray alloc] initWithCapacity:0];
@@ -85,12 +90,15 @@
     if (self.ball.center.x > (CGRectGetWidth(self.frame) - CGRectGetWidth(self.ball.frame)) || self.ball.center.x < CGRectGetWidth(self.ball.frame))
         _ballMovement.x = -_ballMovement.x;
     
-    if (self.ball.center.y < CGRectGetHeight(self.ball.frame))
+    if (self.ball.center.y < CGRectGetHeight(self.livesView.frame))
         _ballMovement.y = -_ballMovement.y;
     else if (self.ball.center.y > CGRectGetHeight(self.frame))
     {
         [_livesView setLives:_livesView.lives - 1];
-        self.ball.center = CGPointMake(80.0, 340.0);
+        
+        self.ball.frame = CGRectMake(80.0, 340.0, 10.0, 10.0);
+        self.playerPaddle.frame = CGRectMake(120.0, 420.0, 60.0, 10.0);
+        _ballMovement = CGPointMake(4.0, 4.0);
     }
     
     if (CGRectIntersectsRect(self.ball.frame, self.playerPaddle.frame))
@@ -153,12 +161,19 @@
         {
             CGFloat row = ((brick__.frame.origin.y - 30.0) / 24.0) + 1.0;
             CGFloat multiplier = (5.0 - row) + 1.0;
-            
-            _score = _score + 5.0 * multiplier;
-            [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
+            [self applyEarnedPoints:(NSUInteger)(5.0 * multiplier)];
             
             [column__ removeObject:brick__];
-            [brick__ removeFromSuperview];
+            
+            [UIView animateWithDuration:0.3 animations:^(void) {
+                
+                brick__.alpha = 0.0;
+                
+            } completion:^(BOOL finished) {
+                
+                [brick__ removeFromSuperview];
+                
+            }];
             
             if ([column__ count] == 0)
                 [self.bricks removeObject:column__];
@@ -177,6 +192,7 @@
     [self addSubview:self.ball];
     
     _score = 0;
+    _bonus = _score;
     [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
     
     [_livesView setLives:3];
@@ -203,6 +219,7 @@
         {
             UIView *brick = [[UIView alloc] initWithFrame:CGRectMake(44.0 * column + 8.0, 24.0 * row + 30.0, 40.0, 20.0)];
             [brick setBackgroundColor:[UIColor colorWithRed:channel green:channel blue:channel alpha:1.0]];
+            [brick.layer setShouldRasterize:YES];
             
             [self addSubview:brick];
             [brickRow addObject:brick];
@@ -213,6 +230,25 @@
     }
     
     return bricks;
+}
+
+
+- (void)applyEarnedPoints:(NSUInteger)points
+{
+    _score += points;
+    _bonus += points;
+    
+    [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
+    
+    if (_bonus >= 150)
+    {
+        _bonus -= 150;
+        
+        if (self.livesView.lives < 3)
+            [self.livesView setLives:self.livesView.lives + 1];
+        else
+            _score += 50;
+    }
 }
 
 

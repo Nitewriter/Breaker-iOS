@@ -43,6 +43,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(life * 14.0 + 10.0, 10.0, 10.0, 10.0)];
         [view setBackgroundColor:[UIColor blackColor]];
         [view.layer setCornerRadius:CGRectGetMidX(view.bounds)];
+        [view.layer setShouldRasterize:YES];
         [self addSubview:view];
     }
 }

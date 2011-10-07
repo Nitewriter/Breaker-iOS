@@ -14,6 +14,7 @@
 {
     CGPoint _ballMovement;
     NSUInteger _score;
+    NSUInteger _bonus;
     
     GVLivesView *_livesView;
     UIView *_ball;

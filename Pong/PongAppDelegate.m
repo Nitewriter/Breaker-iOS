@@ -7,6 +7,7 @@
 //
 
 #import "PongAppDelegate.h"
+#import "GameViewController.h"
 
 @implementation PongAppDelegate
 
@@ -15,6 +16,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    GameViewController *controller = [[GameViewController alloc] initWithNibName:nil bundle:nil];
+    [self.window setRootViewController:controller];
+    [controller release];
+    
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

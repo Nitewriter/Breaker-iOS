@@ -8,12 +8,30 @@
 
 #import <UIKit/UIKit.h>
 
+@class GVLivesView;
+
 @interface GameView : UIView
 {
-    UIView *_ball;
     CGPoint _ballMovement;
+    NSUInteger _score;
+    
+    GVLivesView *_livesView;
+    UIView *_ball;
+    UIView *_playerPaddle;
+    UILabel *_scoreLabel;
+    
+    NSMutableArray *_bricks;
+    
 }
 
+@property (nonatomic, readonly) GVLivesView *livesView;
 @property (nonatomic, readonly) UIView *ball;
+@property (nonatomic, readonly) UIView *playerPaddle;
+@property (nonatomic, readonly) UILabel *scoreLabel;
+
+@property (nonatomic, readonly) NSMutableArray *bricks;
+
+- (void)reset;
+- (BOOL)isGameOver;
 
 @end

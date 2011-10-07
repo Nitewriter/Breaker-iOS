@@ -7,10 +7,22 @@
 //
 
 #import "GameView.h"
+#import "GVLivesView.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface GameView ()
+
+- (NSMutableArray *)newBricks;
+
+@end
 
 @implementation GameView
 
 @synthesize ball = _ball;
+@synthesize playerPaddle = _playerPaddle;
+@synthesize livesView = _livesView;
+@synthesize scoreLabel = _scoreLabel;
+@synthesize bricks = _bricks;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,13 +31,34 @@
     if (self) 
     {
         // Initialization code
+        _ballMovement = CGPointMake(4.0, 4.0);
+        _score = 0;
+        
         [self setBackgroundColor:[UIColor whiteColor]];
         
-        _ball = [[UIView alloc] initWithFrame:CGRectMake(80.0, 80.0, 20.0, 20.0)];
+        _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(170.0, 0.0, 140.0, 30.0)];
+        [self.scoreLabel setTextColor:[UIColor blackColor]];
+        [self.scoreLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+        [self.scoreLabel setTextAlignment:UITextAlignmentRight];
+        [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
+        [self addSubview:self.scoreLabel];
+        
+        _livesView = [[GVLivesView alloc] initWithFrame:CGRectMake(0.0, 0.0, 140.0, 30.0)];
+        [_livesView setLives:3];
+        [self addSubview:_livesView];
+        
+        _ball = [[UIView alloc] initWithFrame:CGRectMake(80.0, 340.0, 10.0, 10.0)];
         [self.ball setBackgroundColor:[UIColor blackColor]];
+        [self.ball.layer setCornerRadius:CGRectGetMidX(self.ball.bounds)];
         [self addSubview:self.ball];
         
-        _ballMovement = CGPointMake(4.0, 4.0);
+        _playerPaddle = [[UIView alloc] initWithFrame:CGRectMake(120.0, 420.0, 60.0, 10.0)];
+        [self.playerPaddle setBackgroundColor:[UIColor grayColor]];
+        [self.playerPaddle.layer setCornerRadius:4.0];
+        [self addSubview:self.playerPaddle];
+        
+        _bricks = [[NSMutableArray alloc] initWithCapacity:0];
+        [self.bricks addObjectsFromArray:[self newBricks]];
     }
     
     return self;
@@ -34,6 +67,11 @@
 - (void)dealloc
 {
     [_ball release];
+    [_playerPaddle release];
+    [_bricks release];
+    [_livesView release];
+    [_scoreLabel release];
+    
     [super dealloc];
 }
 
@@ -44,11 +82,144 @@
     // Drawing code
     self.ball.center = CGPointMake(self.ball.center.x + _ballMovement.x, self.ball.center.y + _ballMovement.y);
     
-    if (self.ball.center.x > 300.0 || self.ball.center.x < 20)
+    if (self.ball.center.x > (CGRectGetWidth(self.frame) - CGRectGetWidth(self.ball.frame)) || self.ball.center.x < CGRectGetWidth(self.ball.frame))
         _ballMovement.x = -_ballMovement.x;
     
-    if (self.ball.center.y > 440.0 || self.ball.center.y < 40)
+    if (self.ball.center.y < CGRectGetHeight(self.ball.frame))
         _ballMovement.y = -_ballMovement.y;
+    else if (self.ball.center.y > CGRectGetHeight(self.frame))
+    {
+        [_livesView setLives:_livesView.lives - 1];
+        self.ball.center = CGPointMake(80.0, 340.0);
+    }
+    
+    if (CGRectIntersectsRect(self.ball.frame, self.playerPaddle.frame))
+    {
+        _ballMovement.y = -_ballMovement.y;
+        
+        CGRect collision = CGRectIntersection(self.ball.frame, self.playerPaddle.frame);
+        CGPoint point = self.ball.center;
+        CGFloat ball_middle = CGRectGetMidX(self.ball.bounds);
+        
+        //        CGFloat offset_x = (collision.origin.x - self.playerPaddle.frame.origin.x) + ball_middle;
+        CGFloat offset_y = (collision.origin.y - self.playerPaddle.frame.origin.y) + ball_middle;
+        
+        
+        if (offset_y > CGRectGetMidY(self.playerPaddle.bounds) && _ballMovement.y > 0)
+            point.y = CGRectGetMaxY(self.playerPaddle.frame) + ball_middle;
+        
+        else if (offset_y <= CGRectGetMidY(self.playerPaddle.bounds) && _ballMovement.y < 0)
+            point.y = CGRectGetMinY(self.playerPaddle.frame) - ball_middle;
+        
+        /*
+         else if (offset_x > CGRectGetMidX(self.playerPaddle.bounds))
+         point.x = CGRectGetMaxX(self.playerPaddle.frame) + center_point;
+         
+         else if (offset_x <= CGRectGetMidX(self.playerPaddle.bounds))
+         point.x = CGRectGetMinX(self.playerPaddle.frame) - center_point;
+         */
+        
+        self.ball.center = point;
+    }
+    
+    else
+    {
+        // Add or remove bricks
+        NSMutableArray *column__ = nil;
+        UIView *brick__ = nil;
+        
+        for (NSMutableArray *column in self.bricks)
+        {
+            // Check for brick collisions
+            for (UIView *brick in column)
+                if (CGRectIntersectsRect(self.ball.frame, brick.frame))
+                {
+                    _ballMovement.y = -_ballMovement.y;
+                    brick__ = brick;
+                    break;
+                }
+            
+            
+            // Target column for removal if empty
+            if (brick__ != nil)
+            {
+                column__ = column;
+                break;
+            }
+        }
+        
+        // Handle brick removal
+        if (brick__ != nil)
+        {
+            CGFloat row = ((brick__.frame.origin.y - 30.0) / 24.0) + 1.0;
+            CGFloat multiplier = (5.0 - row) + 1.0;
+            
+            _score = _score + 5.0 * multiplier;
+            [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
+            
+            [column__ removeObject:brick__];
+            [brick__ removeFromSuperview];
+            
+            if ([column__ count] == 0)
+                [self.bricks removeObject:column__];
+        }
+    }
 }
+
+
+- (void)reset
+{
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    [self addSubview:self.scoreLabel];
+    [self addSubview:self.livesView];
+    [self addSubview:self.playerPaddle];
+    [self addSubview:self.ball];
+    
+    _score = 0;
+    [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
+    
+    [_livesView setLives:3];
+    
+    [self.bricks removeAllObjects];
+    [self.bricks addObjectsFromArray:[self newBricks]];
+    
+    self.ball.frame = CGRectMake(80.0, 340.0, 10.0, 10.0);
+    self.playerPaddle.frame = CGRectMake(120.0, 420.0, 60.0, 10.0);
+    _ballMovement = CGPointMake(4.0, 4.0);
+}
+
+
+- (NSMutableArray *)newBricks
+{
+    NSMutableArray *bricks = [NSMutableArray arrayWithCapacity:0];
+    
+    for (int row = 0; row < 5; row++)
+    {
+        NSMutableArray *brickRow = [NSMutableArray arrayWithCapacity:0];
+        CGFloat channel = ((float)row * 0.1) + 0.2;
+        
+        for (int column = 0; column < 7; column++)
+        {
+            UIView *brick = [[UIView alloc] initWithFrame:CGRectMake(44.0 * column + 8.0, 24.0 * row + 30.0, 40.0, 20.0)];
+            [brick setBackgroundColor:[UIColor colorWithRed:channel green:channel blue:channel alpha:1.0]];
+            
+            [self addSubview:brick];
+            [brickRow addObject:brick];
+            [brick release];
+        }
+        
+        [bricks addObject:brickRow];
+    }
+    
+    return bricks;
+}
+
+
+- (BOOL)isGameOver
+{
+    return (_livesView.lives == 0 || [self.bricks count] == 0);
+}
+
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD145F6B143EB7E400F9111A /* GVLivesView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD145F6A143EB7E400F9111A /* GVLivesView.m */; };
 		BD2F757E143E86710009C491 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F757D143E86710009C491 /* UIKit.framework */; };
 		BD2F7580143E86710009C491 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F757F143E86710009C491 /* Foundation.framework */; };
 		BD2F7582143E86710009C491 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2F7581143E86710009C491 /* CoreGraphics.framework */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD145F69143EB7E400F9111A /* GVLivesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVLivesView.h; sourceTree = "<group>"; };
+		BD145F6A143EB7E400F9111A /* GVLivesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVLivesView.m; sourceTree = "<group>"; };
 		BD2F7579143E86710009C491 /* Pong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD2F757D143E86710009C491 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BD2F757F143E86710009C491 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD145F66143EB71100F9111A /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				BD145F69143EB7E400F9111A /* GVLivesView.h */,
+				BD145F6A143EB7E400F9111A /* GVLivesView.m */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
 		BD2F756E143E86710009C491 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +120,7 @@
 		BD2F759B143E87130009C491 /* Game View */ = {
 			isa = PBXGroup;
 			children = (
+				BD145F66143EB71100F9111A /* Subviews */,
 				BD2F7597143E868E0009C491 /* GameViewController.h */,
 				BD2F7598143E868E0009C491 /* GameViewController.m */,
 				BD2F759C143E87560009C491 /* GameView.h */,
@@ -178,6 +191,7 @@
 				BD2F758E143E86710009C491 /* PongAppDelegate.m in Sources */,
 				BD2F7599143E868E0009C491 /* GameViewController.m in Sources */,
 				BD2F759E143E87560009C491 /* GameView.m in Sources */,
+				BD145F6B143EB7E400F9111A /* GVLivesView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +293,7 @@
 				BD2F7596143E86710009C491 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

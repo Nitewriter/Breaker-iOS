@@ -19,6 +19,7 @@
 		BD2F758E143E86710009C491 /* PongAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F758D143E86710009C491 /* PongAppDelegate.m */; };
 		BD2F7599143E868E0009C491 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7598143E868E0009C491 /* GameViewController.m */; };
 		BD2F759E143E87560009C491 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F759D143E87560009C491 /* GameView.m */; };
+		BDB37943143F476B00E28C90 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BDB37942143F476B00E28C90 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		BD2F7598143E868E0009C491 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		BD2F759C143E87560009C491 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		BD2F759D143E87560009C491 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		BDB37942143F476B00E28C90 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				BD2F7586143E86710009C491 /* InfoPlist.strings */,
 				BD2F7589143E86710009C491 /* main.m */,
 				BD2F758B143E86710009C491 /* Pong-Prefix.pch */,
+				BDB37942143F476B00E28C90 /* LICENSE */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				BD145F6D143ED90800F9111A /* Default@2x.png in Resources */,
 				BD145F70143EDA7B00F9111A /* Icon.png in Resources */,
 				BD145F71143EDA7B00F9111A /* Icon@2x.png in Resources */,
+				BDB37943143F476B00E28C90 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +274,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pong/Pong-Prefix.pch";
 				INFOPLIST_FILE = "Pong/Pong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -281,6 +286,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pong/Pong-Prefix.pch";
 				INFOPLIST_FILE = "Pong/Pong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -70,7 +70,6 @@
     // Add tap support for game pausing
     [self.view addGestureRecognizer:_tapRecognizer];
     
-    
     // Add accelerometer tracking for player paddle input
     UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
     accelerometer.updateInterval = kGameViewRefreshRate;
@@ -143,7 +142,7 @@
     }
 }
 
-- (void)updateGameView:(NSTimer *)timer
+- (void)updateGameView:(CADisplayLink *)sender
 {
     if ([self.gameView isGameOver])
         self.currentState = kGameViewStateGameOver;

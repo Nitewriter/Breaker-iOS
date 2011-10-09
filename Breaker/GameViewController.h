@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/CADisplayLink.h>
 
 @class GameView;
 
@@ -22,7 +23,7 @@ typedef enum
     GameViewState _currentState;
     UITapGestureRecognizer *_tapRecognizer;
     
-    NSTimer *_gameTimer;
+    CADisplayLink *_gameTimer;
 }
 
 @property (nonatomic, readonly) GameView *gameView;

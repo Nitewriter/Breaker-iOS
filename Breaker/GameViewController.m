@@ -125,13 +125,22 @@
     
     if (self.currentState == kGameViewStatePlaying)
         [self initializeTimer];
+    
     else
+    {
         [_gameTimer invalidate];
+        _gameTimer = nil;
+    }
 }
 
 - (void)initializeTimer
 {
-    _gameTimer = [NSTimer scheduledTimerWithTimeInterval:kGameViewRefreshRate target:self selector:@selector(updateGameView:) userInfo:nil repeats:YES];
+    if (_gameTimer == nil) 
+    {
+        _gameTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateGameView:)];
+        _gameTimer.frameInterval = 2;
+        [_gameTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode: NSDefaultRunLoopMode];
+    }
 }
 
 - (void)updateGameView:(NSTimer *)timer
@@ -140,7 +149,10 @@
         self.currentState = kGameViewStateGameOver;
     
     if (self.currentState != kGameViewStatePlaying)
-        [timer invalidate];
+    {
+        [_gameTimer invalidate];
+        _gameTimer = nil;
+    }
     
     else
         [self.gameView setNeedsDisplay];

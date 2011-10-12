@@ -1,5 +1,5 @@
 //
-//  GLBrickView.h
+//  GVBrickView.h
 //  Breaker
 //
 //  Created by Joel Garrett on 10/11/11.
@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GLBrickView : UIView
+@class GVBrick;
+
+@interface GVBrickView : UIView
+{
+    NSMutableArray *_bricks;
+}
+
+
 
 @end

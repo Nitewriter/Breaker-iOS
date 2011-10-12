@@ -23,7 +23,7 @@
 		BD837730144249E500C892F8 /* GVSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83772F144249E500C892F8 /* GVSprite.m */; };
 		BD83773414424EBD00C892F8 /* GVBrick.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83773314424EBD00C892F8 /* GVBrick.m */; };
 		BD8377371442510000C892F8 /* GVBall.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8377361442510000C892F8 /* GVBall.m */; };
-		BD98F0481445289900C9AAA0 /* GLBrickView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F0471445289900C9AAA0 /* GLBrickView.m */; };
+		BD98F0481445289900C9AAA0 /* GVBrickView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F0471445289900C9AAA0 /* GVBrickView.m */; };
 		BD98F04D144528F400C9AAA0 /* GVScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F04C144528F400C9AAA0 /* GVScoreView.m */; };
 		BDD80CFF14413766007F3E86 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD80CFE14413766007F3E86 /* QuartzCore.framework */; };
 		BDEFC2E8143F6589008E19B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEFC2E7143F6589008E19B6 /* Default.png */; };
@@ -56,8 +56,8 @@
 		BD83773314424EBD00C892F8 /* GVBrick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVBrick.m; sourceTree = "<group>"; };
 		BD8377351442510000C892F8 /* GVBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVBall.h; sourceTree = "<group>"; };
 		BD8377361442510000C892F8 /* GVBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVBall.m; sourceTree = "<group>"; };
-		BD98F0461445289900C9AAA0 /* GLBrickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBrickView.h; sourceTree = "<group>"; };
-		BD98F0471445289900C9AAA0 /* GLBrickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBrickView.m; sourceTree = "<group>"; };
+		BD98F0461445289900C9AAA0 /* GVBrickView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GVBrickView.h; sourceTree = "<group>"; };
+		BD98F0471445289900C9AAA0 /* GVBrickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVBrickView.m; sourceTree = "<group>"; };
 		BD98F04B144528F400C9AAA0 /* GVScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVScoreView.h; sourceTree = "<group>"; };
 		BD98F04C144528F400C9AAA0 /* GVScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVScoreView.m; sourceTree = "<group>"; };
 		BDD80CFE14413766007F3E86 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -125,8 +125,8 @@
 			children = (
 				BD7AE7BE143F4E0E00F12BC5 /* GVLivesView.h */,
 				BD7AE7BF143F4E0E00F12BC5 /* GVLivesView.m */,
-				BD98F0461445289900C9AAA0 /* GLBrickView.h */,
-				BD98F0471445289900C9AAA0 /* GLBrickView.m */,
+				BD98F0461445289900C9AAA0 /* GVBrickView.h */,
+				BD98F0471445289900C9AAA0 /* GVBrickView.m */,
 				BD98F04B144528F400C9AAA0 /* GVScoreView.h */,
 				BD98F04C144528F400C9AAA0 /* GVScoreView.m */,
 			);
@@ -252,7 +252,7 @@
 				BD837730144249E500C892F8 /* GVSprite.m in Sources */,
 				BD83773414424EBD00C892F8 /* GVBrick.m in Sources */,
 				BD8377371442510000C892F8 /* GVBall.m in Sources */,
-				BD98F0481445289900C9AAA0 /* GLBrickView.m in Sources */,
+				BD98F0481445289900C9AAA0 /* GVBrickView.m in Sources */,
 				BD98F04D144528F400C9AAA0 /* GVScoreView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

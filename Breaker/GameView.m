@@ -9,6 +9,7 @@
 #import "GameView.h"
 #import "GVLivesView.h"
 #import "GVScoreView.h"
+#import "GVBrickView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface GameView () <GVScoreViewDelegate>
@@ -23,6 +24,7 @@
 @synthesize playerPaddle = _playerPaddle;
 @synthesize livesView = _livesView;
 @synthesize scoreView = _scoreView;
+@synthesize brickView = _brickView;
 @synthesize bricks = _bricks;
 
 - (id)initWithFrame:(CGRect)frame
@@ -69,6 +71,8 @@
     [_playerPaddle release];
     [_bricks release];
     [_livesView release];
+    [_scoreView release];
+    [_brickView release];
     
     [super dealloc];
 }

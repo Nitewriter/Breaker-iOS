@@ -10,6 +10,7 @@
 
 @class GVLivesView;
 @class GVScoreView;
+@class GVBrickView;
 
 @interface GameView : UIView
 {
@@ -17,6 +18,7 @@
     
     GVLivesView *_livesView;
     GVScoreView *_scoreView;
+    GVBrickView *_brickView;
     UIView *_ball;
     UIView *_playerPaddle;
     
@@ -26,6 +28,7 @@
 
 @property (nonatomic, readonly) GVLivesView *livesView;
 @property (nonatomic, readonly) GVScoreView *scoreView;
+@property (nonatomic, readonly) GVBrickView *brickView;
 @property (nonatomic, readonly) UIView *ball;
 @property (nonatomic, readonly) UIView *playerPaddle;
 

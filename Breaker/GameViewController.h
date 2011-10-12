@@ -31,6 +31,6 @@ typedef enum
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)recognizer;
 - (void)initializeTimer;
-- (void)updateGameView:(NSTimer *)timer;
+- (void)updateGameView:(CADisplayLink *)timer;
 
 @end

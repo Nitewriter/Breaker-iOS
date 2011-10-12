@@ -8,12 +8,12 @@
 
 #import "GameView.h"
 #import "GVLivesView.h"
+#import "GVScoreView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface GameView ()
+@interface GameView () <GVScoreViewDelegate>
 
 - (NSMutableArray *)newBricks;
-- (void)applyEarnedPoints:(NSUInteger)points;
 
 @end
 
@@ -22,7 +22,7 @@
 @synthesize ball = _ball;
 @synthesize playerPaddle = _playerPaddle;
 @synthesize livesView = _livesView;
-@synthesize scoreLabel = _scoreLabel;
+@synthesize scoreView = _scoreView;
 @synthesize bricks = _bricks;
 
 - (id)initWithFrame:(CGRect)frame
@@ -33,18 +33,12 @@
     {
         // Initialization code
         _ballMovement = CGPointMake(4.0, 4.0);
-        _score = 0;
-        _bonus = _score;
         
         [self setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
         
-        _scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(170.0, 0.0, 140.0, 30.0)];
-        [self.scoreLabel setBackgroundColor:self.backgroundColor];
-        [self.scoreLabel setTextColor:[UIColor blackColor]];
-        [self.scoreLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
-        [self.scoreLabel setTextAlignment:UITextAlignmentRight];
-        [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
-        [self addSubview:self.scoreLabel];
+        _scoreView = [[GVScoreView alloc] initWithFrame:CGRectMake(172.0, 0.0, 140.0, 30.0)];
+        [_scoreView setDelegate:self];
+        [self addSubview:self.scoreView];
         
         _livesView = [[GVLivesView alloc] initWithFrame:CGRectMake(0.0, 0.0, 140.0, 30.0)];
         [_livesView setLives:3];
@@ -56,7 +50,7 @@
         [self.ball.layer setShouldRasterize:YES];
         [self addSubview:self.ball];
         
-        _playerPaddle = [[UIView alloc] initWithFrame:CGRectMake(120.0, 420.0, 60.0, 10.0)];
+        _playerPaddle = [[UIView alloc] initWithFrame:CGRectMake(120.0, 420.0, 70.0, 10.0)];
         [self.playerPaddle setBackgroundColor:[UIColor grayColor]];
         [self.playerPaddle.layer setCornerRadius:4.0];
         [self.playerPaddle.layer setShouldRasterize:YES];
@@ -75,7 +69,6 @@
     [_playerPaddle release];
     [_bricks release];
     [_livesView release];
-    [_scoreLabel release];
     
     [super dealloc];
 }
@@ -97,7 +90,7 @@
         [_livesView setLives:_livesView.lives - 1];
         
         self.ball.frame = CGRectMake(80.0, 340.0, 10.0, 10.0);
-        self.playerPaddle.frame = CGRectMake(120.0, 420.0, 60.0, 10.0);
+        self.playerPaddle.frame = CGRectMake(120.0, 420.0, 70.0, 10.0);
         _ballMovement = CGPointMake(4.0, 4.0);
     }
     
@@ -161,7 +154,8 @@
         {
             CGFloat row = ((brick__.frame.origin.y - 30.0) / 24.0) + 1.0;
             CGFloat multiplier = (5.0 - row) + 1.0;
-            [self applyEarnedPoints:(NSUInteger)(5.0 * multiplier)];
+            NSUInteger points = (NSUInteger)(5.0 * multiplier);
+            [self.scoreView applyPoints:points];
             
             [column__ removeObject:brick__];
             
@@ -186,22 +180,18 @@
 {
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    [self addSubview:self.scoreLabel];
     [self addSubview:self.livesView];
     [self addSubview:self.playerPaddle];
     [self addSubview:self.ball];
     
-    _score = 0;
-    _bonus = _score;
-    [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
-    
+    [_scoreView resetScore];
     [_livesView setLives:3];
     
     [self.bricks removeAllObjects];
     [self.bricks addObjectsFromArray:[self newBricks]];
     
     self.ball.frame = CGRectMake(80.0, 340.0, 10.0, 10.0);
-    self.playerPaddle.frame = CGRectMake(120.0, 420.0, 60.0, 10.0);
+    self.playerPaddle.frame = CGRectMake(120.0, 420.0, 70.0, 10.0);
     _ballMovement = CGPointMake(4.0, 4.0);
 }
 
@@ -233,28 +223,21 @@
 }
 
 
-- (void)applyEarnedPoints:(NSUInteger)points
-{
-    _score += points;
-    _bonus += points;
-    
-    [self.scoreLabel setText:[NSString stringWithFormat:@"%03d", _score]];
-    
-    if (_bonus >= 150)
-    {
-        _bonus -= 150;
-        
-        if (self.livesView.lives < 3)
-            [self.livesView setLives:self.livesView.lives + 1];
-        else
-            _score += 50;
-    }
-}
-
-
 - (BOOL)isGameOver
 {
     return (_livesView.lives == 0 || [self.bricks count] == 0);
+}
+
+
+#pragma mark - GVScroreView delegate method
+
+- (void)pointsDidTriggerBonus:(ScoreViewBonus)bonus
+{
+    if (bonus == kScoreViewBonusExtraBall)
+        if (self.livesView.lives < 3)
+            [self.livesView setLives:self.livesView.lives + 1];
+        else
+            [self.scoreView applyPoints:50];
 }
 
 

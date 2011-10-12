@@ -7,6 +7,7 @@
 //
 
 #import "GVBrick.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation GVBrick
 
@@ -20,9 +21,24 @@
     if (self) 
     {
         // Initialization code here.
+        [self.layer setShouldRasterize:YES];
     }
     
     return self;
+}
+
+
+- (void)handleCollision:(CGRect)collision
+{
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        
+        self.alpha = 0.0;
+        
+    } completion:^(BOOL finished) {
+        
+        [self removeFromSuperview]; 
+        
+    }];
 }
 
 
@@ -30,7 +46,8 @@
 {
     _pointValue = pointValue;
     
-    CGFloat channel = ((float)pointValue * 0.1) + 0.2;
+    NSInteger rank = ((25 - pointValue) * 0.2);
+    CGFloat channel = ((float)rank * 0.1) + 0.2;
     [self setBackgroundColor:[UIColor colorWithRed:channel green:channel blue:channel alpha:1.0]];
 }
 

@@ -21,9 +21,6 @@
     GVBrickView *_brickView;
     UIView *_ball;
     UIView *_playerPaddle;
-    
-    NSMutableArray *_bricks;
-    
 }
 
 @property (nonatomic, readonly) GVLivesView *livesView;
@@ -31,8 +28,6 @@
 @property (nonatomic, readonly) GVBrickView *brickView;
 @property (nonatomic, readonly) UIView *ball;
 @property (nonatomic, readonly) UIView *playerPaddle;
-
-@property (nonatomic, readonly) NSMutableArray *bricks;
 
 - (void)reset;
 - (BOOL)isGameOver;

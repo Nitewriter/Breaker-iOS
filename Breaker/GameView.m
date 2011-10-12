@@ -10,11 +10,12 @@
 #import "GVLivesView.h"
 #import "GVScoreView.h"
 #import "GVBrickView.h"
+
+#import "GVBrick.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 @interface GameView () <GVScoreViewDelegate>
-
-- (NSMutableArray *)newBricks;
 
 @end
 
@@ -25,7 +26,6 @@
 @synthesize livesView = _livesView;
 @synthesize scoreView = _scoreView;
 @synthesize brickView = _brickView;
-@synthesize bricks = _bricks;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -44,7 +44,10 @@
         
         _livesView = [[GVLivesView alloc] initWithFrame:CGRectMake(0.0, 0.0, 140.0, 30.0)];
         [_livesView setLives:3];
-        [self addSubview:_livesView];
+        [self addSubview:self.livesView];
+        
+        _brickView = [[GVBrickView alloc] initWithFrame:CGRectMake(8.0, 30.0, 300.0, 200.0)];
+        [self addSubview:self.brickView];
         
         _ball = [[UIView alloc] initWithFrame:CGRectMake(80.0, 340.0, 10.0, 10.0)];
         [self.ball setBackgroundColor:[UIColor blackColor]];
@@ -57,9 +60,6 @@
         [self.playerPaddle.layer setCornerRadius:4.0];
         [self.playerPaddle.layer setShouldRasterize:YES];
         [self addSubview:self.playerPaddle];
-        
-        _bricks = [[NSMutableArray alloc] initWithCapacity:0];
-        [self.bricks addObjectsFromArray:[self newBricks]];
     }
     
     return self;
@@ -69,7 +69,6 @@
 {
     [_ball release];
     [_playerPaddle release];
-    [_bricks release];
     [_livesView release];
     [_scoreView release];
     [_brickView release];
@@ -82,6 +81,7 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
+    // Boundary collisions
     self.ball.center = CGPointMake(self.ball.center.x + _ballMovement.x, self.ball.center.y + _ballMovement.y);
     
     if (self.ball.center.x > (CGRectGetWidth(self.frame) - CGRectGetWidth(self.ball.frame)) || self.ball.center.x < CGRectGetWidth(self.ball.frame))
@@ -98,6 +98,7 @@
         _ballMovement = CGPointMake(4.0, 4.0);
     }
     
+    // Paddle collisions
     if (CGRectIntersectsRect(self.ball.frame, self.playerPaddle.frame))
     {
         _ballMovement.y = -_ballMovement.y;
@@ -127,54 +128,17 @@
         self.ball.center = point;
     }
     
-    else
+    // Brick collisions
+    else if (CGRectIntersectsRect(self.ball.frame, self.brickView.frame))
     {
-        // Add or remove bricks
-        NSMutableArray *column__ = nil;
-        UIView *brick__ = nil;
+        CGRect intersection = CGRectIntersection(self.ball.frame, self.brickView.frame);
+        GVBrick *brick = [self.brickView brickInRect:[self convertRect:intersection toView:self.brickView]];
         
-        for (NSMutableArray *column in self.bricks)
+        if (brick != nil)
         {
-            // Check for brick collisions
-            for (UIView *brick in column)
-                if (CGRectIntersectsRect(self.ball.frame, brick.frame))
-                {
-                    _ballMovement.y = -_ballMovement.y;
-                    brick__ = brick;
-                    break;
-                }
-            
-            
-            // Target column for removal if empty
-            if (brick__ != nil)
-            {
-                column__ = column;
-                break;
-            }
-        }
-        
-        // Handle brick removal
-        if (brick__ != nil)
-        {
-            CGFloat row = ((brick__.frame.origin.y - 30.0) / 24.0) + 1.0;
-            CGFloat multiplier = (5.0 - row) + 1.0;
-            NSUInteger points = (NSUInteger)(5.0 * multiplier);
-            [self.scoreView applyPoints:points];
-            
-            [column__ removeObject:brick__];
-            
-            [UIView animateWithDuration:0.3 animations:^(void) {
-                
-                brick__.alpha = 0.0;
-                
-            } completion:^(BOOL finished) {
-                
-                [brick__ removeFromSuperview];
-                
-            }];
-            
-            if ([column__ count] == 0)
-                [self.bricks removeObject:column__];
+            _ballMovement.y = -_ballMovement.y;
+            [self.scoreView applyPoints:[brick pointValue]];
+            [self.brickView removeBrick:brick];
         }
     }
 }
@@ -185,14 +149,13 @@
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     [self addSubview:self.livesView];
+    [self addSubview:self.scoreView];
+    [self addSubview:self.brickView];
     [self addSubview:self.playerPaddle];
     [self addSubview:self.ball];
     
     [_scoreView resetScore];
     [_livesView setLives:3];
-    
-    [self.bricks removeAllObjects];
-    [self.bricks addObjectsFromArray:[self newBricks]];
     
     self.ball.frame = CGRectMake(80.0, 340.0, 10.0, 10.0);
     self.playerPaddle.frame = CGRectMake(120.0, 420.0, 70.0, 10.0);
@@ -200,36 +163,9 @@
 }
 
 
-- (NSMutableArray *)newBricks
-{
-    NSMutableArray *bricks = [NSMutableArray arrayWithCapacity:0];
-    
-    for (int row = 0; row < 5; row++)
-    {
-        NSMutableArray *brickRow = [NSMutableArray arrayWithCapacity:0];
-        CGFloat channel = ((float)row * 0.1) + 0.2;
-        
-        for (int column = 0; column < 7; column++)
-        {
-            UIView *brick = [[UIView alloc] initWithFrame:CGRectMake(44.0 * column + 8.0, 24.0 * row + 30.0, 40.0, 20.0)];
-            [brick setBackgroundColor:[UIColor colorWithRed:channel green:channel blue:channel alpha:1.0]];
-            [brick.layer setShouldRasterize:YES];
-            
-            [self addSubview:brick];
-            [brickRow addObject:brick];
-            [brick release];
-        }
-        
-        [bricks addObject:brickRow];
-    }
-    
-    return bricks;
-}
-
-
 - (BOOL)isGameOver
 {
-    return (_livesView.lives == 0 || [self.bricks count] == 0);
+    return (_livesView.lives == 0 || [self.brickView.bricks count] == 0);
 }
 
 

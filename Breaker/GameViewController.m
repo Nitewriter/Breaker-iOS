@@ -49,7 +49,9 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    GameView *view = [[GameView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    CGRect frame = CGRectOffset(CGRectInset([[UIScreen mainScreen] bounds], 0.0, 10.0), 0.0, -10.0);
+    
+    GameView *view = [[GameView alloc] initWithFrame:frame];
     [self setView:view];
     [view release];
 }

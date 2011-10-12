@@ -15,7 +15,10 @@
     NSMutableArray *_bricks;
 }
 
+@property (nonatomic, readonly) NSMutableArray *bricks;
+
 - (GVBrick *)brickInRect:(CGRect)rect;
+- (void)removeBrick:(GVBrick *)brick;
 - (void)reloadBricks;
 
 @end

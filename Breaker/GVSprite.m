@@ -13,6 +13,7 @@
 
 @synthesize force = _force;
 @synthesize velocity = _velocity;
+@synthesize anchored = _anchored;
 
 - (id)initWithFrame:(CGRect)frame
 {

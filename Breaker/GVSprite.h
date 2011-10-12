@@ -12,10 +12,13 @@
 {
     CGPoint _force;
     CGPoint _velocity;
+    
+    BOOL _anchored;
 }
 
 @property (nonatomic) CGPoint force;
 @property (nonatomic) CGPoint velocity;
+@property (nonatomic, getter = isAnchored) BOOL anchored;
 
 - (void)handleCollision:(CGRect)collision;
 

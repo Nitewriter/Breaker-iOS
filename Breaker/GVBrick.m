@@ -22,6 +22,7 @@
     {
         // Initialization code here.
         [self.layer setShouldRasterize:YES];
+        [self setAnchored:YES];
     }
     
     return self;

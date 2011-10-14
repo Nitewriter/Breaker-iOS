@@ -63,8 +63,6 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
     // Add tap support for game pausing
     [self.view addGestureRecognizer:_tapRecognizer];
     [self.view addGestureRecognizer:_panRecognizer];
-    
-    [self setControlType:kGameViewPlayerControlTypeTouch];
 }
 
 
@@ -97,9 +95,21 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
 
 - (void)startGame;
 {
+    // Block consecutive start game calls
     if (_displayLink != nil)
         return;
     
+    // Reset game view before resume if needed
+    if ([self.gameView isGameOver])
+        [self.gameView reset];
+    
+    // Set game state to playing
+    _currentState = kGameViewStatePlaying;
+    
+    // Set player's preferred control type
+    [self setControlType:[NSUserDefaults preferredControlType]];
+    
+    // Observe display link iterations
     _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateGame:)];
     _displayLink.frameInterval = 2;
     [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode: NSDefaultRunLoopMode];
@@ -108,6 +118,11 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
 
 - (void)stopGame
 {
+    // Pause game if currently playing
+    if (self.currentState == kGameViewStatePlaying)
+        _currentState = kGameViewStatePaused;
+    
+    // Stop display link iteration observations
     [_displayLink invalidate];
     _displayLink = nil;
 }

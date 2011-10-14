@@ -154,6 +154,8 @@ float const kGameViewPaddleDragTilt = 1.0;
         
         if (brick != nil)
         {
+            [brick handleCollision:CGRectNull];
+            
             _ballMovement.y = -_ballMovement.y;
             [self.scoreView applyPoints:[brick pointValue]];
             [self.brickView removeBrick:brick];

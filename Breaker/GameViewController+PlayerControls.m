@@ -9,6 +9,8 @@
 #import "GameViewController+PlayerControls.h"
 #import "GameView.h"
 
+#import "InfoViewController.h"
+
 @implementation GameViewController (PlayerControls)
 
 #pragma mark - Player control methods
@@ -19,7 +21,7 @@
     
     UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
     
-    if (controlType == kGameViewPlayerControltypeTilt)
+    if (controlType == kGameViewPlayerControltypeTilt && accelerometer.delegate == nil)
     {
         accelerometer.updateInterval = kGameViewRefreshRate;
         accelerometer.delegate = self;
@@ -42,34 +44,34 @@
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)recognizer
 {
-    if ([self.gameView isGameOver])
-        [self.gameView reset];
+    // TODO Add setting button during paused state
+    // Display settings view controller
+    if (self.currentState != kGameViewStatePlaying)
+        if ([recognizer locationInView:self.view].y <= 30.0)
+        {
+            InfoViewController *controller = [[InfoViewController alloc] initWithNibName:nil bundle:nil];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+            [controller release];
+            
+            [self presentModalViewController:navController animated:YES];
+            [navController release];
+            
+            return;
+        }
+
     
-    switch (self.currentState) {
-        case kGameViewStateGameOver:
-            _currentState = kGameViewStatePlaying;
-            break;
-            
+    // Adjust game state
+    switch (self.currentState) 
+    {
         case kGameViewStatePlaying:
-            _currentState = kGameViewStatePaused;
-            break;
-            
-        case kGameViewStatePaused:
-            _currentState = kGameViewStatePlaying;
+            [self stopGame];
             break;
             
         default:
-            NSLog(@"Current State %d: Unbound state received. Resetting state to game over.", self.currentState);
-            _currentState = kGameViewStateGameOver;
+            [self startGame];
             break;
     }
-    
-    
-    if (self.currentState == kGameViewStatePlaying)
-        [self startGame];
-    
-    else
-        [self stopGame];
 }
 
 

@@ -60,7 +60,6 @@
             if (CGRectIntersectsRect(rect, brick.frame))
             {
                 brick__ = brick;
-                [brick handleCollision:rect];
                 break;
             }
     

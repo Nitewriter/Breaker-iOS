@@ -24,6 +24,11 @@
 		BD83773414424EBD00C892F8 /* GVBrick.m in Sources */ = {isa = PBXBuildFile; fileRef = BD83773314424EBD00C892F8 /* GVBrick.m */; };
 		BD8377371442510000C892F8 /* GVBall.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8377361442510000C892F8 /* GVBall.m */; };
 		BD8FAB121447D338000F6DBC /* GameViewController+PlayerControls.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8FAB111447D338000F6DBC /* GameViewController+PlayerControls.m */; };
+		BD8FAB151447E9A1000F6DBC /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD8FAB141447E9A1000F6DBC /* defaults.plist */; };
+		BD8FAB181447EACD000F6DBC /* NSUserDefaults+BreakerDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8FAB171447EACD000F6DBC /* NSUserDefaults+BreakerDefaults.m */; };
+		BD8FAB1A1447EBE8000F6DBC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD8FAB191447EBE8000F6DBC /* Settings.bundle */; };
+		BD8FAB231447F24C000F6DBC /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8FAB221447F24C000F6DBC /* InfoViewController.m */; };
+		BD8FAB271447F267000F6DBC /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8FAB261447F267000F6DBC /* InfoView.m */; };
 		BD98F0481445289900C9AAA0 /* GVBrickView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F0471445289900C9AAA0 /* GVBrickView.m */; };
 		BD98F04D144528F400C9AAA0 /* GVScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F04C144528F400C9AAA0 /* GVScoreView.m */; };
 		BDD80CFF14413766007F3E86 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD80CFE14413766007F3E86 /* QuartzCore.framework */; };
@@ -59,6 +64,14 @@
 		BD8377361442510000C892F8 /* GVBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVBall.m; sourceTree = "<group>"; };
 		BD8FAB101447D338000F6DBC /* GameViewController+PlayerControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GameViewController+PlayerControls.h"; sourceTree = "<group>"; };
 		BD8FAB111447D338000F6DBC /* GameViewController+PlayerControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GameViewController+PlayerControls.m"; sourceTree = "<group>"; };
+		BD8FAB141447E9A1000F6DBC /* defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
+		BD8FAB161447EACD000F6DBC /* NSUserDefaults+BreakerDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+BreakerDefaults.h"; sourceTree = "<group>"; };
+		BD8FAB171447EACD000F6DBC /* NSUserDefaults+BreakerDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+BreakerDefaults.m"; sourceTree = "<group>"; };
+		BD8FAB191447EBE8000F6DBC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		BD8FAB211447F24C000F6DBC /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		BD8FAB221447F24C000F6DBC /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		BD8FAB251447F267000F6DBC /* InfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoView.h; sourceTree = "<group>"; };
+		BD8FAB261447F267000F6DBC /* InfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoView.m; sourceTree = "<group>"; };
 		BD98F0461445289900C9AAA0 /* GVBrickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVBrickView.h; sourceTree = "<group>"; };
 		BD98F0471445289900C9AAA0 /* GVBrickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVBrickView.m; sourceTree = "<group>"; };
 		BD98F04B144528F400C9AAA0 /* GVScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVScoreView.h; sourceTree = "<group>"; };
@@ -113,10 +126,8 @@
 		BD5E5FF6143F4F62007D1FCB /* Game View */ = {
 			isa = PBXGroup;
 			children = (
-				BD8FAB0F1447D30B000F6DBC /* Categories */,
 				BD8FAB0E1447D2F1000F6DBC /* View */,
-				BD98F04A144528CC00C9AAA0 /* Sprites */,
-				BD5E5FF7143F4F75007D1FCB /* Subviews */,
+				BD8FAB0F1447D30B000F6DBC /* Categories */,
 				BD7AE7BC143F4E0E00F12BC5 /* GameViewController.h */,
 				BD7AE7BD143F4E0E00F12BC5 /* GameViewController.m */,
 			);
@@ -163,6 +174,8 @@
 		BD7AE7B5143F4E0E00F12BC5 /* Breaker */ = {
 			isa = PBXGroup;
 			children = (
+				BD8FAB201447F223000F6DBC /* Info View */,
+				BD8FAB131447E984000F6DBC /* User Defaults */,
 				BD5E5FF8143F4F84007D1FCB /* Supporting Files */,
 				BD5E5FF6143F4F62007D1FCB /* Game View */,
 				BD7AE7C2143F4E0E00F12BC5 /* BreakerAppDelegate.h */,
@@ -174,6 +187,8 @@
 		BD8FAB0E1447D2F1000F6DBC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BD98F04A144528CC00C9AAA0 /* Sprites */,
+				BD5E5FF7143F4F75007D1FCB /* Subviews */,
 				BD7AE7BA143F4E0E00F12BC5 /* GameView.h */,
 				BD7AE7BB143F4E0E00F12BC5 /* GameView.m */,
 			);
@@ -187,6 +202,44 @@
 				BD8FAB111447D338000F6DBC /* GameViewController+PlayerControls.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		BD8FAB131447E984000F6DBC /* User Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				BD8FAB1F1447F209000F6DBC /* Settings */,
+				BD8FAB141447E9A1000F6DBC /* defaults.plist */,
+				BD8FAB161447EACD000F6DBC /* NSUserDefaults+BreakerDefaults.h */,
+				BD8FAB171447EACD000F6DBC /* NSUserDefaults+BreakerDefaults.m */,
+			);
+			name = "User Defaults";
+			sourceTree = "<group>";
+		};
+		BD8FAB1F1447F209000F6DBC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BD8FAB191447EBE8000F6DBC /* Settings.bundle */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		BD8FAB201447F223000F6DBC /* Info View */ = {
+			isa = PBXGroup;
+			children = (
+				BD8FAB241447F24F000F6DBC /* View */,
+				BD8FAB211447F24C000F6DBC /* InfoViewController.h */,
+				BD8FAB221447F24C000F6DBC /* InfoViewController.m */,
+			);
+			name = "Info View";
+			sourceTree = "<group>";
+		};
+		BD8FAB241447F24F000F6DBC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BD8FAB251447F267000F6DBC /* InfoView.h */,
+				BD8FAB261447F267000F6DBC /* InfoView.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		BD98F04A144528CC00C9AAA0 /* Sprites */ = {
@@ -258,6 +311,8 @@
 				BD5E5FFE143F4FB4007D1FCB /* Icon.png in Resources */,
 				BD5E5FFF143F4FB4007D1FCB /* Icon@2x.png in Resources */,
 				BDEFC2E8143F6589008E19B6 /* Default.png in Resources */,
+				BD8FAB151447E9A1000F6DBC /* defaults.plist in Resources */,
+				BD8FAB1A1447EBE8000F6DBC /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +334,9 @@
 				BD98F0481445289900C9AAA0 /* GVBrickView.m in Sources */,
 				BD98F04D144528F400C9AAA0 /* GVScoreView.m in Sources */,
 				BD8FAB121447D338000F6DBC /* GameViewController+PlayerControls.m in Sources */,
+				BD8FAB181447EACD000F6DBC /* NSUserDefaults+BreakerDefaults.m in Sources */,
+				BD8FAB231447F24C000F6DBC /* InfoViewController.m in Sources */,
+				BD8FAB271447F267000F6DBC /* InfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

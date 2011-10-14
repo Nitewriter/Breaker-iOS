@@ -32,6 +32,7 @@
 		BD98F0481445289900C9AAA0 /* GVBrickView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F0471445289900C9AAA0 /* GVBrickView.m */; };
 		BD98F04D144528F400C9AAA0 /* GVScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F04C144528F400C9AAA0 /* GVScoreView.m */; };
 		BDD80CFF14413766007F3E86 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD80CFE14413766007F3E86 /* QuartzCore.framework */; };
+		BDEAD52F1448070E00BC9D3A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEAD52E1448070E00BC9D3A /* Default@2x.png */; };
 		BDEFC2E8143F6589008E19B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEFC2E7143F6589008E19B6 /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		BD98F04B144528F400C9AAA0 /* GVScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVScoreView.h; sourceTree = "<group>"; };
 		BD98F04C144528F400C9AAA0 /* GVScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVScoreView.m; sourceTree = "<group>"; };
 		BDD80CFE14413766007F3E86 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BDEAD52E1448070E00BC9D3A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BDEFC2E7143F6589008E19B6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,7 @@
 		BD2F756E143E86710009C491 = {
 			isa = PBXGroup;
 			children = (
+				BDEAD52E1448070E00BC9D3A /* Default@2x.png */,
 				BD7AE7B5143F4E0E00F12BC5 /* Breaker */,
 				BD2F757C143E86710009C491 /* Frameworks */,
 				BD2F757A143E86710009C491 /* Products */,
@@ -313,6 +316,7 @@
 				BDEFC2E8143F6589008E19B6 /* Default.png in Resources */,
 				BD8FAB151447E9A1000F6DBC /* defaults.plist in Resources */,
 				BD8FAB1A1447EBE8000F6DBC /* Settings.bundle in Resources */,
+				BDEAD52F1448070E00BC9D3A /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

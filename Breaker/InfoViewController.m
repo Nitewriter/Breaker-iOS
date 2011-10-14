@@ -60,4 +60,17 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+
++ (void)presentModalInfoViewControllerAnimated
+{
+    InfoViewController *controller = [[InfoViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [controller release];
+    
+    UIViewController *rootViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    [rootViewController presentModalViewController:navController animated:YES];
+    [navController release];
+}
+
 @end

@@ -11,5 +11,6 @@
 @interface InfoViewController : UIViewController
 
 - (void)buttonPressed:(id)sender;
++ (void)presentModalInfoViewControllerAnimated;
 
 @end

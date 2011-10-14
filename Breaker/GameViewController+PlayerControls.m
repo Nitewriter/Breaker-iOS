@@ -59,15 +59,7 @@
     // TODO Add setting button during paused state
     // Display settings view controller
     else
-    {
-        InfoViewController *controller = [[InfoViewController alloc] initWithNibName:nil bundle:nil];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-        [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        [controller release];
-        
-        [self presentModalViewController:navController animated:YES];
-        [navController release];
-    }
+        [InfoViewController presentModalInfoViewControllerAnimated];
 }
 
 

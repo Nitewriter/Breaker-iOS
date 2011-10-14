@@ -30,6 +30,7 @@ typedef enum
 {
     GameViewState _currentState;
     GameViewPlayerControlType _controlType;
+    BOOL _controlEnabled;
     
     UITapGestureRecognizer *_tapRecognizer;
     UIPanGestureRecognizer *_panRecognizer;
@@ -40,6 +41,7 @@ typedef enum
 @property (nonatomic, readonly) GameView *gameView;
 @property (nonatomic, readonly) GameViewState currentState;
 @property (nonatomic, readonly) GameViewPlayerControlType controlType;
+@property (nonatomic, readonly, getter = isControlEnabled) BOOL controlEnabled;
 
 - (void)startGame;
 - (void)stopGame;

@@ -16,6 +16,7 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
 
 @synthesize currentState = _currentState;
 @synthesize controlType = _controlType;
+@synthesize controlEnabled = _controlEnabled;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,9 +25,11 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
     if (self) 
     {
         // Custom initialization
+        // Add tap gesture for switching game states
         _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
         [_tapRecognizer setNumberOfTapsRequired:1];
         
+        // Add pan gesture for touch control support
         _panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
         [_panRecognizer setMaximumNumberOfTouches:1];
     }
@@ -50,6 +53,7 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
 {
     CGRect frame = CGRectOffset(CGRectInset([[UIScreen mainScreen] bounds], 0.0, 10.0), 0.0, -10.0);
     
+    // Create and set game view
     GameView *view = [[GameView alloc] initWithFrame:frame];
     [self setView:view];
     [view release];
@@ -60,7 +64,7 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
 {
     [super viewDidAppear:animated];
     
-    // Add tap support for game pausing
+    // Add gestures to game view
     [self.view addGestureRecognizer:_tapRecognizer];
     [self.view addGestureRecognizer:_panRecognizer];
 }
@@ -69,12 +73,10 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    _currentState = kGameViewStateGameOver;
     
-    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:0.0];
-    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+    // Stop the game if playing
+    if (self.currentState == kGameViewStatePlaying)
+        [self stopGame];
 }
 
 
@@ -107,7 +109,10 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
     _currentState = kGameViewStatePlaying;
     
     // Set player's preferred control type
-    [self setControlType:[NSUserDefaults preferredControlType]];
+    if (self.controlType != [NSUserDefaults preferredControlType])
+        [self setControlType:[NSUserDefaults preferredControlType]];
+    
+    [self setControlEnabled:YES];
     
     // Observe display link iterations
     _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateGame:)];
@@ -118,6 +123,9 @@ float const kGameViewRefreshRate = (1.0 / 30.0);
 
 - (void)stopGame
 {
+    // Disable player controls
+    [self setControlEnabled:NO];
+    
     // Pause game if currently playing
     if (self.currentState == kGameViewStatePlaying)
         _currentState = kGameViewStatePaused;

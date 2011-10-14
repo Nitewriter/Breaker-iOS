@@ -15,29 +15,32 @@
 
 #pragma mark - Player control methods
 
+- (void)setControlEnabled:(BOOL)enabled
+{
+    _controlEnabled = enabled;
+    
+    if (self.controlType == kGameViewPlayerControlTypeTouch)
+        [_panRecognizer setEnabled:enabled];
+    
+    else if (self.controlType == kGameViewPlayerControltypeTilt)
+    {
+        UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+        
+        accelerometer.updateInterval = enabled ? kGameViewRefreshRate : 0.0;
+        accelerometer.delegate = enabled ? self : nil;
+    }
+}
+
+
 - (void)setControlType:(GameViewPlayerControlType)controlType
 {
     _controlType = controlType;
     
-    UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
-    
-    if (controlType == kGameViewPlayerControltypeTilt && accelerometer.delegate == nil)
-    {
-        accelerometer.updateInterval = kGameViewRefreshRate;
-        accelerometer.delegate = self;
-        
-        [_panRecognizer setEnabled:NO];
+    if (controlType == kGameViewPlayerControltypeTilt)
         [self.gameView setPaddleDrag:kGameViewPaddleDragTilt];
-    }
     
     else if (controlType == kGameViewPlayerControlTypeTouch)
-    {
-        accelerometer.updateInterval = 0.0;
-        accelerometer.delegate = nil;
-        
-        [_panRecognizer setEnabled:YES];
         [self.gameView setPaddleDrag:kGameViewPaddleDragTouch];
-    }
 }
 
 #pragma mark - UIGestureRecognizer handler methods
@@ -70,8 +73,12 @@
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer
 {
+    // Update paddle translation if playing
     if (self.currentState == kGameViewStatePlaying)
+    {
+        [self.gameView setPaddleDrag:kGameViewPaddleDragTouch];
         self.gameView.paddleTranslation = [recognizer locationInView:self.gameView];
+    }
 }
 
 
@@ -79,11 +86,13 @@
 
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
+    // Update paddle translation if playing
     if (self.currentState == kGameViewStatePlaying)
     {
         CGFloat offset_x = self.gameView.playerPaddle.center.x + (acceleration.x * 12.0);
         CGPoint translation = CGPointMake(offset_x, self.gameView.playerPaddle.center.y);
         
+        [self.gameView setPaddleDrag:kGameViewPaddleDragTilt];
         [self.gameView setPaddleTranslation:translation];   
     }
 }

@@ -13,6 +13,7 @@
 
 #pragma mark - Player control methods
 
+- (void)setControlEnabled:(BOOL)enabled;
 - (void)setControlType:(GameViewPlayerControlType)controlType;
 
 

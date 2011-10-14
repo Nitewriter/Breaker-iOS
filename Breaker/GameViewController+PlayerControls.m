@@ -44,33 +44,26 @@
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)recognizer
 {
+    // Stop the game if playing
+    if (self.currentState == kGameViewStatePlaying)
+        [self stopGame];
+    
+    // Start the game if not playing and tapping below score/life display
+    else if ([recognizer locationInView:self.view].y > 30.0)
+        [self startGame];
+    
+    
     // TODO Add setting button during paused state
     // Display settings view controller
-    if (self.currentState != kGameViewStatePlaying)
-        if ([recognizer locationInView:self.view].y <= 30.0)
-        {
-            InfoViewController *controller = [[InfoViewController alloc] initWithNibName:nil bundle:nil];
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
-            [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-            [controller release];
-            
-            [self presentModalViewController:navController animated:YES];
-            [navController release];
-            
-            return;
-        }
-
-    
-    // Adjust game state
-    switch (self.currentState) 
+    else
     {
-        case kGameViewStatePlaying:
-            [self stopGame];
-            break;
-            
-        default:
-            [self startGame];
-            break;
+        InfoViewController *controller = [[InfoViewController alloc] initWithNibName:nil bundle:nil];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+        [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [controller release];
+        
+        [self presentModalViewController:navController animated:YES];
+        [navController release];
     }
 }
 
@@ -78,16 +71,7 @@
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer
 {
     if (self.currentState == kGameViewStatePlaying)
-        switch (recognizer.state) {
-            case UIGestureRecognizerStateChanged:
-            {
-                self.gameView.paddleTranslation = [recognizer locationInView:self.gameView];;
-            }
-                break;
-                
-            default:
-                break;
-        }
+        self.gameView.paddleTranslation = [recognizer locationInView:self.gameView];
 }
 
 

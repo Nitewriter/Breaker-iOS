@@ -12,6 +12,9 @@
 @class GVScoreView;
 @class GVBrickView;
 
+extern float const kGameViewPaddleDragTouch;
+extern float const kGameViewPaddleDragTilt;
+
 @interface GameView : UIView
 {
     CGPoint _ballMovement;
@@ -21,6 +24,9 @@
     GVBrickView *_brickView;
     UIView *_ball;
     UIView *_playerPaddle;
+    
+    CGFloat _paddleDrag;
+    CGPoint _paddleTranslation;
 }
 
 @property (nonatomic, readonly) GVLivesView *livesView;
@@ -28,6 +34,10 @@
 @property (nonatomic, readonly) GVBrickView *brickView;
 @property (nonatomic, readonly) UIView *ball;
 @property (nonatomic, readonly) UIView *playerPaddle;
+
+@property (nonatomic, readwrite) CGFloat paddleDrag;
+@property (nonatomic, readwrite) CGPoint paddleTranslation;
+
 
 - (void)reset;
 - (BOOL)isGameOver;

@@ -11,6 +11,8 @@
 
 @class GameView;
 
+extern float const kGameViewRefreshRate;
+
 typedef enum
 {
     kGameViewStateGameOver = 0,
@@ -18,19 +20,29 @@ typedef enum
     kGameViewStatePaused
 } GameViewState;
 
+typedef enum
+{
+    kGameViewPlayerControlTypeTouch = 0,
+    kGameViewPlayerControltypeTilt,
+} GameViewPlayerControlType;
+
 @interface GameViewController : UIViewController <UIAccelerometerDelegate>
 {
     GameViewState _currentState;
-    UITapGestureRecognizer *_tapRecognizer;
+    GameViewPlayerControlType _controlType;
     
-    CADisplayLink *_gameTimer;
+    UITapGestureRecognizer *_tapRecognizer;
+    UIPanGestureRecognizer *_panRecognizer;
+    
+    CADisplayLink *_displayLink;
 }
 
 @property (nonatomic, readonly) GameView *gameView;
-@property (nonatomic, readwrite) GameViewState currentState;
+@property (nonatomic, readonly) GameViewState currentState;
+@property (nonatomic, readonly) GameViewPlayerControlType controlType;
 
-- (void)handleTapGesture:(UITapGestureRecognizer *)recognizer;
-- (void)initializeTimer;
-- (void)updateGameView:(CADisplayLink *)timer;
+- (void)startGame;
+- (void)stopGame;
+- (void)updateGame:(CADisplayLink *)displayLink;
 
 @end

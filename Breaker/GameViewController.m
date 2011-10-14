@@ -7,13 +7,15 @@
 //
 
 #import "GameViewController.h"
+#import "GameViewController+PlayerControls.h"
 #import "GameView.h"
 
-#define kGameViewRefreshRate    1.0/30.0
+float const kGameViewRefreshRate = (1.0 / 30.0);
 
 @implementation GameViewController
 
 @synthesize currentState = _currentState;
+@synthesize controlType = _controlType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,6 +26,9 @@
         // Custom initialization
         _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
         [_tapRecognizer setNumberOfTapsRequired:1];
+        
+        _panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+        [_panRecognizer setMaximumNumberOfTouches:1];
     }
     
     return self;
@@ -32,16 +37,10 @@
 - (void)dealloc
 {
     [_tapRecognizer release];
+    [_panRecognizer release];
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
 
 #pragma mark - View lifecycle
 
@@ -57,25 +56,15 @@
 }
 
 
-/*
- // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
- - (void)viewDidLoad
- {
- [super viewDidLoad];
- }
- */
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
     // Add tap support for game pausing
     [self.view addGestureRecognizer:_tapRecognizer];
+    [self.view addGestureRecognizer:_panRecognizer];
     
-    // Add accelerometer tracking for player paddle input
-    UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
-    accelerometer.updateInterval = kGameViewRefreshRate;
-    accelerometer.delegate = self;
+    [self setControlType:kGameViewPlayerControlTypeTouch];
 }
 
 
@@ -84,7 +73,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.currentState = kGameViewStateGameOver;
+    _currentState = kGameViewStateGameOver;
     
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:0.0];
     [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
@@ -100,79 +89,40 @@
 
 #pragma mark - Class methods
 
-- (void)handleTapGesture:(UITapGestureRecognizer *)recognizer
-{
-    if ([self.gameView isGameOver])
-        [self.gameView reset];
-    
-    switch (self.currentState) {
-        case kGameViewStateGameOver:
-            self.currentState = kGameViewStatePlaying;
-            break;
-            
-        case kGameViewStatePlaying:
-            self.currentState = kGameViewStatePaused;
-            break;
-            
-        case kGameViewStatePaused:
-            self.currentState = kGameViewStatePlaying;
-            break;
-            
-        default:
-            NSLog(@"Current State %d: Unbound state received. Resetting state to game over.", self.currentState);
-            self.currentState = kGameViewStateGameOver;
-            break;
-    }
-    
-    if (self.currentState == kGameViewStatePlaying)
-        [self initializeTimer];
-    
-    else
-    {
-        [_gameTimer invalidate];
-        _gameTimer = nil;
-    }
-}
-
-- (void)initializeTimer
-{
-    if (_gameTimer == nil) 
-    {
-        _gameTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateGameView:)];
-        _gameTimer.frameInterval = 2;
-        [_gameTimer addToRunLoop:[NSRunLoop currentRunLoop] forMode: NSDefaultRunLoopMode];
-    }
-}
-
-- (void)updateGameView:(CADisplayLink *)sender
-{
-    if ([self.gameView isGameOver])
-        self.currentState = kGameViewStateGameOver;
-    
-    if (self.currentState != kGameViewStatePlaying)
-    {
-        [_gameTimer invalidate];
-        _gameTimer = nil;
-    }
-    
-    else
-        [self.gameView setNeedsDisplay];
-}
-
 - (GameView *)gameView
 {
     return (GameView *)self.view;
 }
 
 
-#pragma mark - UIAccelerometer delegate methods
-
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+- (void)startGame;
 {
-    float offset = self.gameView.playerPaddle.center.x + (acceleration.x * 12.0);
+    if (_displayLink != nil)
+        return;
     
-    if (self.currentState == kGameViewStatePlaying && offset > 30.0 && offset < 290.0)
-        self.gameView.playerPaddle.center = CGPointMake(offset, self.gameView.playerPaddle.center.y);
+    _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateGame:)];
+    _displayLink.frameInterval = 2;
+    [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode: NSDefaultRunLoopMode];
+}
+
+
+- (void)stopGame
+{
+    [_displayLink invalidate];
+    _displayLink = nil;
+}
+
+
+- (void)updateGame:(CADisplayLink *)__unused displayLink;
+{
+    if ([self.gameView isGameOver])
+        _currentState = kGameViewStateGameOver;
+    
+    if (self.currentState != kGameViewStatePlaying)
+        [self stopGame];
+    
+    else
+        [self.gameView setNeedsDisplay];
 }
 
 @end

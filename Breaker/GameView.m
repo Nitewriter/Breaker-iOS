@@ -15,6 +15,9 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+float const kGameViewPaddleDragTouch = 0.125;
+float const kGameViewPaddleDragTilt = 1.0;
+
 @interface GameView () <GVScoreViewDelegate>
 
 @end
@@ -26,6 +29,9 @@
 @synthesize livesView = _livesView;
 @synthesize scoreView = _scoreView;
 @synthesize brickView = _brickView;
+@synthesize paddleDrag = _paddleDrag;
+@synthesize paddleTranslation = _paddleTranslation;
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -35,6 +41,7 @@
     {
         // Initialization code
         _ballMovement = CGPointMake(4.0, 4.0);
+        _paddleDrag = kGameViewPaddleDragTilt;
         
         [self setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
         
@@ -60,6 +67,8 @@
         [self.playerPaddle.layer setCornerRadius:4.0];
         [self.playerPaddle.layer setShouldRasterize:YES];
         [self addSubview:self.playerPaddle];
+        
+        _paddleTranslation = _playerPaddle.center;
     }
     
     return self;
@@ -81,6 +90,15 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
+    
+    // Update paddle translation
+    CGFloat distance = self.paddleTranslation.x - self.playerPaddle.center.x;
+    CGFloat offset_x = self.playerPaddle.center.x + (distance * self.paddleDrag);
+    
+    if (offset_x > CGRectGetMidX(self.playerPaddle.bounds) && 
+        offset_x < CGRectGetWidth(self.frame) - CGRectGetMidX(self.playerPaddle.bounds))
+        self.playerPaddle.center = CGPointMake(offset_x, self.playerPaddle.center.y);
+    
     // Boundary collisions
     self.ball.center = CGPointMake(self.ball.center.x + _ballMovement.x, self.ball.center.y + _ballMovement.y);
     

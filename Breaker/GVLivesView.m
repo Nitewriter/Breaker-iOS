@@ -45,6 +45,7 @@
         [view.layer setCornerRadius:CGRectGetMidX(view.bounds)];
         [view.layer setShouldRasterize:YES];
         [self addSubview:view];
+        [view release];
     }
 }
 

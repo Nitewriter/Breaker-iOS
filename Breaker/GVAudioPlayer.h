@@ -12,15 +12,20 @@
 @interface GVAudioPlayer : NSObject
 {
     NSMutableDictionary *_playlist;
+    NSMutableDictionary *_sounds;
 }
 
 @property (nonatomic, readonly) NSMutableDictionary *playlist;
+@property (nonatomic, readonly) NSMutableDictionary *sounds;
 
-- (void)createSoundIDForAllKeys;
-- (void)createSoundIDForKey:(NSString *)key;
-- (void)removeSoundIDForKey:(NSString *)key;
-- (void)playSoundIDForKey:(NSString *)key;
-- (SystemSoundID)soundIDForKey:(NSString *)key;
+- (void)loadPlaylist;
+- (void)unloadPlaylist;
+
+- (void)createSystemSoundForKey:(NSString *)key;
+- (void)removeSystemSoundForKey:(NSString *)key;
+- (void)playSystemSoundForKey:(NSString *)key;
+
+- (BOOL)systemSoundExistsForKey:(NSString *)key;
 
 
 @end

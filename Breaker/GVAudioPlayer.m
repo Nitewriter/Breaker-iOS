@@ -11,16 +11,15 @@
 @implementation GVAudioPlayer
 
 @synthesize playlist = _playlist;
+@synthesize sounds = _sounds;
 
 - (void)dealloc
 {
     // Dispose of system sounds
-    NSArray *keys = [self.playlist allKeys];
-    
-    for (NSString *key in keys)
-        [self removeSoundIDForKey:key];
+    [self unloadPlaylist];
     
     [_playlist release];
+    [_sounds release];
     [super dealloc];
 }
 
@@ -36,6 +35,7 @@
         NSDictionary *playlist = [NSDictionary dictionaryWithContentsOfFile:path];
         
         _playlist = [[NSMutableDictionary alloc] initWithDictionary:playlist];
+        _sounds = [[NSMutableDictionary alloc] initWithCapacity:0];
     }
     
     return self;
@@ -44,67 +44,83 @@
 
 #pragma mark - Class methods
 
-- (void)createSoundIDForAllKeys
+- (void)loadPlaylist
 {
     NSArray *keys = [self.playlist allKeys];
     
     for (NSString *key in keys)
-        [self createSoundIDForKey:key];
+        [self createSystemSoundForKey:key];
 }
 
 
-- (void)createSoundIDForKey:(NSString *)key
+- (void)unloadPlaylist
 {
-    NSString *object = [self.playlist objectForKey:key];
+    NSArray *keys = [self.sounds allKeys];
     
-    if ([object isKindOfClass:[NSString class]])
+    for (NSString *key in keys)
+        [self removeSystemSoundForKey:key];
+}
+
+
+- (SystemSoundID)systemSoundIDForKey:(NSString *)key
+{
+    NSNumber *sound = [self.sounds objectForKey:key];
+    
+    if (sound != nil && [sound isKindOfClass:[NSNumber class]])
+        return (SystemSoundID)[sound unsignedLongValue];
+    
+    return NSNotFound;
+}
+
+
+- (void)createSystemSoundForKey:(NSString *)key
+{
+    // Return if sound ID has been created
+    if ([self.sounds objectForKey:key] != nil)
+        return;
+    
+    NSString *filename = [self.playlist objectForKey:key];
+    NSString *resource = [filename stringByDeletingPathExtension];
+    NSString *type = [[filename componentsSeparatedByString:@"."] lastObject];
+    NSString *path = [[NSBundle mainBundle] pathForResource:resource ofType:type];
+    
+    CFURLRef URL = (CFURLRef)[NSURL fileURLWithPath:path];
+    SystemSoundID systemSoundID = NSNotFound;
+    AudioServicesCreateSystemSoundID(URL, &systemSoundID);
+    
+    if (systemSoundID != NSNotFound)
     {
-        NSString *filename = [object stringByDeletingPathExtension];
-        NSString *type = [[object componentsSeparatedByString:@"."] lastObject];
-        NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:type];
-        
-        CFURLRef URL = (CFURLRef)[NSURL fileURLWithPath:path];
-        SystemSoundID soundID = NSNotFound;
-        AudioServicesCreateSystemSoundID(URL, &soundID);
-        
-        if (soundID != NSNotFound)
-            [self.playlist setObject:[NSNumber numberWithUnsignedLong:soundID] forKey:key];
+        NSNumber *sound = [NSNumber numberWithUnsignedLong:systemSoundID];
+        [self.sounds setObject:sound forKey:key];
     }
 }
 
 
-- (void)removeSoundIDForKey:(NSString *)key
+- (void)removeSystemSoundForKey:(NSString *)key
 {
-    NSNumber *sound = [self.playlist objectForKey:key];
-    
-    if ([sound isKindOfClass:[NSNumber class]])
+    if ([self systemSoundExistsForKey:key])
     {
-        SystemSoundID soundID = (SystemSoundID)[sound unsignedLongValue];
+        SystemSoundID soundID = [self systemSoundIDForKey:key];
         AudioServicesDisposeSystemSoundID(soundID);
+        [self.sounds removeObjectForKey:key];
     }
 }
 
 
-- (void)playSoundIDForKey:(NSString *)key
+- (void)playSystemSoundForKey:(NSString *)key
 {
-    NSNumber *sound = [self.playlist objectForKey:key];
-    
-    if ([sound isKindOfClass:[NSNumber class]])
+    if ([self systemSoundExistsForKey:key])
     {
-        SystemSoundID soundID = (SystemSoundID)[sound unsignedLongValue];
+        SystemSoundID soundID = [self systemSoundIDForKey:key];
         AudioServicesPlaySystemSound(soundID);
     }
 }
 
 
-- (SystemSoundID)soundIDForKey:(NSString *)key
+- (BOOL)systemSoundExistsForKey:(NSString *)key
 {
-    NSNumber *soundIDNumber = [self.playlist objectForKey:key];
-    
-    if (soundIDNumber != nil && [soundIDNumber isKindOfClass:[NSNumber class]])
-        return (SystemSoundID)[soundIDNumber unsignedLongValue];
-    
-    return NSNotFound;
+    return ([self systemSoundIDForKey:key] != NSNotFound);
 }
+
 
 @end

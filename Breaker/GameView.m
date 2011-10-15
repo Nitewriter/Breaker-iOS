@@ -75,7 +75,7 @@ float const kGameViewPaddleDragTilt = 1.0;
         
         // Load audio for collisions
         _audioPlayer = [[GVAudioPlayer alloc] init];
-        [self.audioPlayer createSoundIDForAllKeys];
+        [self.audioPlayer loadPlaylist];
     }
     
     return self;
@@ -117,7 +117,7 @@ float const kGameViewPaddleDragTilt = 1.0;
         _ballMovement.y = -_ballMovement.y;
     else if (self.ball.center.y > CGRectGetHeight(self.frame))
     {
-        [self.audioPlayer playSoundIDForKey:kGVAudioPlayerKeyGutterCollision];
+        [self.audioPlayer playSystemSoundForKey:kGVAudioPlayerKeyGutterCollision];
         
         [_livesView setLives:_livesView.lives - 1];
         
@@ -129,7 +129,7 @@ float const kGameViewPaddleDragTilt = 1.0;
     // Paddle collisions
     if (CGRectIntersectsRect(self.ball.frame, self.playerPaddle.frame))
     {
-        [self.audioPlayer playSoundIDForKey:kGVAudioPlayerKeyPaddleCollision];
+        [self.audioPlayer playSystemSoundForKey:kGVAudioPlayerKeyPaddleCollision];
         
         _ballMovement.y = -_ballMovement.y;
         
@@ -166,7 +166,7 @@ float const kGameViewPaddleDragTilt = 1.0;
         
         if (brick != nil)
         {
-            [self.audioPlayer playSoundIDForKey:kGVAudioPlayerKeyBrickCollision];
+            [self.audioPlayer playSystemSoundForKey:kGVAudioPlayerKeyBrickCollision];
             
             [brick handleCollision:CGRectNull];
             

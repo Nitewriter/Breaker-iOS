@@ -72,7 +72,7 @@ float const kGameViewPaddleDragTilt = 1.0;
         _paddleTranslation = _playerPaddle.center;
         
         // Load audio for collisions
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Blip_001" ofType:@"caf"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Blip_008" ofType:@"caf"];
         CFURLRef collisionURL = (CFURLRef)[NSURL fileURLWithPath:path];
         AudioServicesCreateSystemSoundID(collisionURL, &_collisionSound);
     }

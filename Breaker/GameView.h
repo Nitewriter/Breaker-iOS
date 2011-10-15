@@ -29,7 +29,9 @@ extern float const kGameViewPaddleDragTilt;
     CGFloat _paddleDrag;
     CGPoint _paddleTranslation;
     
-    SystemSoundID _collisionSound;
+    SystemSoundID _brickCollisionSound;
+    SystemSoundID _paddleCollisionSound;
+    SystemSoundID _gutterCollisionSound;
 }
 
 @property (nonatomic, readonly) GVLivesView *livesView;
@@ -41,7 +43,9 @@ extern float const kGameViewPaddleDragTilt;
 @property (nonatomic, readwrite) CGFloat paddleDrag;
 @property (nonatomic, readwrite) CGPoint paddleTranslation;
 
-@property (nonatomic) SystemSoundID collisionSound;
+@property (nonatomic) SystemSoundID brickCollisionSound;
+@property (nonatomic) SystemSoundID paddleCollisionSound;
+@property (nonatomic) SystemSoundID gutterCollisionSound;
 
 
 - (void)reset;

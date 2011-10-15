@@ -50,6 +50,23 @@
 }
 
 
+- (id)initWithPlaylist:(NSDictionary *)playlist loadImmediately:(BOOL)load
+{
+    self = [self initWithPlaylist:playlist];
+    
+    if (self)
+    {
+        // Init
+        
+        // Load immediately if playlist has items
+        if (load && [[self.playlist allKeys] count] > 0)
+            [self loadPlaylist];
+    }
+    
+    return self;
+}
+
+
 #pragma mark - Class methods
 
 - (void)loadPlaylist

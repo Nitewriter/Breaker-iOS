@@ -19,6 +19,7 @@
 @property (nonatomic, readonly) NSMutableDictionary *sounds;
 
 - (id)initWithPlaylist:(NSDictionary *)playlist;
+- (id)initWithPlaylist:(NSDictionary *)playlist loadImmediately:(BOOL)load;
 
 - (void)loadPlaylist;
 - (void)unloadPlaylist;

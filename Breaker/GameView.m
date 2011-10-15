@@ -31,6 +31,7 @@ float const kGameViewPaddleDragTilt = 1.0;
 @synthesize brickView = _brickView;
 @synthesize paddleDrag = _paddleDrag;
 @synthesize paddleTranslation = _paddleTranslation;
+@synthesize collisionSound = _collisionSound;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -69,6 +70,11 @@ float const kGameViewPaddleDragTilt = 1.0;
         [self addSubview:self.playerPaddle];
         
         _paddleTranslation = _playerPaddle.center;
+        
+        // Load audio for collisions
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Blip_001" ofType:@"caf"];
+        CFURLRef collisionURL = (CFURLRef)[NSURL fileURLWithPath:path];
+        AudioServicesCreateSystemSoundID(collisionURL, &_collisionSound);
     }
     
     return self;
@@ -76,6 +82,8 @@ float const kGameViewPaddleDragTilt = 1.0;
 
 - (void)dealloc
 {
+    AudioServicesDisposeSystemSoundID(_collisionSound);
+    
     [_ball release];
     [_playerPaddle release];
     [_livesView release];
@@ -119,6 +127,8 @@ float const kGameViewPaddleDragTilt = 1.0;
     // Paddle collisions
     if (CGRectIntersectsRect(self.ball.frame, self.playerPaddle.frame))
     {
+        AudioServicesPlaySystemSound(self.collisionSound);
+        
         _ballMovement.y = -_ballMovement.y;
         
         CGRect collision = CGRectIntersection(self.ball.frame, self.playerPaddle.frame);
@@ -154,6 +164,8 @@ float const kGameViewPaddleDragTilt = 1.0;
         
         if (brick != nil)
         {
+            AudioServicesPlaySystemSound(self.collisionSound);
+            
             [brick handleCollision:CGRectNull];
             
             _ballMovement.y = -_ballMovement.y;

@@ -31,8 +31,9 @@
 		BD8FAB271447F267000F6DBC /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8FAB261447F267000F6DBC /* InfoView.m */; };
 		BD98F0481445289900C9AAA0 /* GVBrickView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F0471445289900C9AAA0 /* GVBrickView.m */; };
 		BD98F04D144528F400C9AAA0 /* GVScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD98F04C144528F400C9AAA0 /* GVScoreView.m */; };
+		BDC4B21D144914F200B3BAC2 /* Blip_001.caf in Resources */ = {isa = PBXBuildFile; fileRef = BDC4B21C144914F200B3BAC2 /* Blip_001.caf */; };
+		BDC4B2201449150900B3BAC2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC4B21E144914FF00B3BAC2 /* AudioToolbox.framework */; };
 		BDD80CFF14413766007F3E86 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDD80CFE14413766007F3E86 /* QuartzCore.framework */; };
-		BDEAD52F1448070E00BC9D3A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEAD52E1448070E00BC9D3A /* Default@2x.png */; };
 		BDEFC2E8143F6589008E19B6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEFC2E7143F6589008E19B6 /* Default.png */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,8 @@
 		BD98F0471445289900C9AAA0 /* GVBrickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVBrickView.m; sourceTree = "<group>"; };
 		BD98F04B144528F400C9AAA0 /* GVScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVScoreView.h; sourceTree = "<group>"; };
 		BD98F04C144528F400C9AAA0 /* GVScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVScoreView.m; sourceTree = "<group>"; };
+		BDC4B21C144914F200B3BAC2 /* Blip_001.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Blip_001.caf; sourceTree = "<group>"; };
+		BDC4B21E144914FF00B3BAC2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BDD80CFE14413766007F3E86 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BDEAD52E1448070E00BC9D3A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BDEFC2E7143F6589008E19B6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
@@ -87,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDC4B2201449150900B3BAC2 /* AudioToolbox.framework in Frameworks */,
 				BDD80CFF14413766007F3E86 /* QuartzCore.framework in Frameworks */,
 				BD2F757E143E86710009C491 /* UIKit.framework in Frameworks */,
 				BD2F7580143E86710009C491 /* Foundation.framework in Frameworks */,
@@ -118,6 +122,7 @@
 		BD2F757C143E86710009C491 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDC4B21E144914FF00B3BAC2 /* AudioToolbox.framework */,
 				BDD80CFE14413766007F3E86 /* QuartzCore.framework */,
 				BD2F757D143E86710009C491 /* UIKit.framework */,
 				BD2F757F143E86710009C491 /* Foundation.framework */,
@@ -166,6 +171,7 @@
 		BD5E5FF9143F4FA4007D1FCB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				BDC4B2191449134400B3BAC2 /* Audio */,
 				BDEFC2E7143F6589008E19B6 /* Default.png */,
 				BD5E5FFA143F4FB4007D1FCB /* Default@2x.png */,
 				BD5E5FFB143F4FB4007D1FCB /* Icon.png */,
@@ -258,6 +264,14 @@
 			name = Sprites;
 			sourceTree = "<group>";
 		};
+		BDC4B2191449134400B3BAC2 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				BDC4B21C144914F200B3BAC2 /* Blip_001.caf */,
+			);
+			path = Audio;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -316,7 +330,7 @@
 				BDEFC2E8143F6589008E19B6 /* Default.png in Resources */,
 				BD8FAB151447E9A1000F6DBC /* defaults.plist in Resources */,
 				BD8FAB1A1447EBE8000F6DBC /* Settings.bundle in Resources */,
-				BDEAD52F1448070E00BC9D3A /* Default@2x.png in Resources */,
+				BDC4B21D144914F200B3BAC2 /* Blip_001.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

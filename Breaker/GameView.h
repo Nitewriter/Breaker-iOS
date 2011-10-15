@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @class GVLivesView;
 @class GVScoreView;
@@ -27,6 +28,8 @@ extern float const kGameViewPaddleDragTilt;
     
     CGFloat _paddleDrag;
     CGPoint _paddleTranslation;
+    
+    SystemSoundID _collisionSound;
 }
 
 @property (nonatomic, readonly) GVLivesView *livesView;
@@ -37,6 +40,8 @@ extern float const kGameViewPaddleDragTilt;
 
 @property (nonatomic, readwrite) CGFloat paddleDrag;
 @property (nonatomic, readwrite) CGPoint paddleTranslation;
+
+@property (nonatomic) SystemSoundID collisionSound;
 
 
 - (void)reset;

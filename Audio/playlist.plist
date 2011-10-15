@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>kGVAudioPlayerKeyBrickCollision</key>
+	<string>Blip_008.caf</string>
+	<key>kGVAudioPlayerKeyPaddleCollision</key>
+	<string>Blip_009.caf</string>
+	<key>kGVAudioPlayerKeyGutterCollision</key>
+	<string>Zoom_Down_004.caf</string>
+</dict>
+</plist>

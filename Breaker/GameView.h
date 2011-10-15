@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AudioToolbox/AudioToolbox.h>
 
 @class GVLivesView;
 @class GVScoreView;
 @class GVBrickView;
+@class GVAudioPlayer;
 
 extern float const kGameViewPaddleDragTouch;
 extern float const kGameViewPaddleDragTilt;
@@ -29,9 +29,7 @@ extern float const kGameViewPaddleDragTilt;
     CGFloat _paddleDrag;
     CGPoint _paddleTranslation;
     
-    SystemSoundID _brickCollisionSound;
-    SystemSoundID _paddleCollisionSound;
-    SystemSoundID _gutterCollisionSound;
+    GVAudioPlayer *_audioPlayer;
 }
 
 @property (nonatomic, readonly) GVLivesView *livesView;
@@ -43,9 +41,7 @@ extern float const kGameViewPaddleDragTilt;
 @property (nonatomic, readwrite) CGFloat paddleDrag;
 @property (nonatomic, readwrite) CGPoint paddleTranslation;
 
-@property (nonatomic) SystemSoundID brickCollisionSound;
-@property (nonatomic) SystemSoundID paddleCollisionSound;
-@property (nonatomic) SystemSoundID gutterCollisionSound;
+@property (nonatomic, readonly) GVAudioPlayer *audioPlayer;
 
 
 - (void)reset;

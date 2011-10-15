@@ -10,6 +10,8 @@
 #import "GVLivesView.h"
 #import "GVScoreView.h"
 #import "GVBrickView.h"
+#import "GVAudioPlayer.h"
+#import "GVAudioPlayerKeys.h"
 
 #import "GVBrick.h"
 
@@ -31,10 +33,7 @@ float const kGameViewPaddleDragTilt = 1.0;
 @synthesize brickView = _brickView;
 @synthesize paddleDrag = _paddleDrag;
 @synthesize paddleTranslation = _paddleTranslation;
-
-@synthesize brickCollisionSound = _brickCollisionSound;
-@synthesize paddleCollisionSound = _paddleCollisionSound;
-@synthesize gutterCollisionSound = _gutterCollisionSound;
+@synthesize audioPlayer = _audioPlayer;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -75,17 +74,8 @@ float const kGameViewPaddleDragTilt = 1.0;
         _paddleTranslation = _playerPaddle.center;
         
         // Load audio for collisions
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"Blip_008" ofType:@"caf"];
-        CFURLRef collisionURL = (CFURLRef)[NSURL fileURLWithPath:path];
-        AudioServicesCreateSystemSoundID(collisionURL, &_brickCollisionSound);
-        
-        path = [[NSBundle mainBundle] pathForResource:@"Blip_009" ofType:@"caf"];
-        collisionURL = (CFURLRef)[NSURL fileURLWithPath:path];
-        AudioServicesCreateSystemSoundID(collisionURL, &_paddleCollisionSound);
-        
-        path = [[NSBundle mainBundle] pathForResource:@"Zoom_Down_004" ofType:@"caf"];
-        collisionURL = (CFURLRef)[NSURL fileURLWithPath:path];
-        AudioServicesCreateSystemSoundID(collisionURL, &_gutterCollisionSound);
+        _audioPlayer = [[GVAudioPlayer alloc] init];
+        [self.audioPlayer createSoundIDForAllKeys];
     }
     
     return self;
@@ -93,15 +83,12 @@ float const kGameViewPaddleDragTilt = 1.0;
 
 - (void)dealloc
 {
-    AudioServicesDisposeSystemSoundID(_brickCollisionSound);
-    AudioServicesDisposeSystemSoundID(_paddleCollisionSound);
-    AudioServicesDisposeSystemSoundID(_gutterCollisionSound);
-    
     [_ball release];
     [_playerPaddle release];
     [_livesView release];
     [_scoreView release];
     [_brickView release];
+    [_audioPlayer release];
     
     [super dealloc];
 }
@@ -130,7 +117,7 @@ float const kGameViewPaddleDragTilt = 1.0;
         _ballMovement.y = -_ballMovement.y;
     else if (self.ball.center.y > CGRectGetHeight(self.frame))
     {
-        AudioServicesPlaySystemSound(self.gutterCollisionSound);
+        [self.audioPlayer playSoundIDForKey:kGVAudioPlayerKeyGutterCollision];
         
         [_livesView setLives:_livesView.lives - 1];
         
@@ -142,7 +129,7 @@ float const kGameViewPaddleDragTilt = 1.0;
     // Paddle collisions
     if (CGRectIntersectsRect(self.ball.frame, self.playerPaddle.frame))
     {
-        AudioServicesPlaySystemSound(self.paddleCollisionSound);
+        [self.audioPlayer playSoundIDForKey:kGVAudioPlayerKeyPaddleCollision];
         
         _ballMovement.y = -_ballMovement.y;
         
@@ -179,7 +166,7 @@ float const kGameViewPaddleDragTilt = 1.0;
         
         if (brick != nil)
         {
-            AudioServicesPlaySystemSound(self.brickCollisionSound);
+            [self.audioPlayer playSoundIDForKey:kGVAudioPlayerKeyBrickCollision];
             
             [brick handleCollision:CGRectNull];
             

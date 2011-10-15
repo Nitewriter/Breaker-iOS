@@ -29,12 +29,12 @@
 - (void)loadPlaylist;
 - (void)unloadPlaylist;
 
+- (BOOL)systemSoundExistsForKey:(NSString *)key;
 - (BOOL)createSystemSoundWithName:(NSString *)filename forKey:(NSString *)key;
 - (BOOL)createSystemSoundForKey:(NSString *)key;
 - (void)removeSystemSoundForKey:(NSString *)key;
 - (void)playSystemSoundForKey:(NSString *)key;
 
-- (BOOL)systemSoundExistsForKey:(NSString *)key;
 
 
 @end

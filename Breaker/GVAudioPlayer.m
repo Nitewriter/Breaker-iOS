@@ -129,6 +129,12 @@
 }
 
 
+- (BOOL)systemSoundExistsForKey:(NSString *)key
+{
+    return ([self systemSoundIDForKey:key] != NSNotFound);
+}
+
+
 - (BOOL)createSystemSoundWithName:(NSString *)filename forKey:(NSString *)key
 {
     // Return no if nil values received
@@ -206,12 +212,6 @@
         SystemSoundID soundID = [self systemSoundIDForKey:key];
         AudioServicesPlaySystemSound(soundID);
     }
-}
-
-
-- (BOOL)systemSoundExistsForKey:(NSString *)key
-{
-    return ([self systemSoundIDForKey:key] != NSNotFound);
 }
 
 

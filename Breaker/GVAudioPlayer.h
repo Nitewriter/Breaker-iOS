@@ -18,10 +18,12 @@
 @property (nonatomic, readonly) NSMutableDictionary *playlist;
 @property (nonatomic, readonly) NSMutableDictionary *sounds;
 
+- (id)initWithPlaylist:(NSDictionary *)playlist;
+
 - (void)loadPlaylist;
 - (void)unloadPlaylist;
 
-- (void)createSystemSoundForKey:(NSString *)key;
+- (BOOL)createSystemSoundForKey:(NSString *)key;
 - (void)removeSystemSoundForKey:(NSString *)key;
 - (void)playSystemSoundForKey:(NSString *)key;
 

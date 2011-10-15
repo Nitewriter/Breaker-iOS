@@ -24,18 +24,26 @@
 }
 
 
-- (id)init
+- (id)initWithPlaylist:(NSDictionary *)playlist;
 {
     self = [super init];
     
     if (self)
     {
         // Init
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"playlist" ofType:@"plist"];
-        NSDictionary *playlist = [NSDictionary dictionaryWithContentsOfFile:path];
-        
-        _playlist = [[NSMutableDictionary alloc] initWithDictionary:playlist];
+        _playlist = [[NSMutableDictionary alloc] initWithCapacity:0];         
         _sounds = [[NSMutableDictionary alloc] initWithCapacity:0];
+        
+        // Load bundled playlist if available
+        if (playlist == nil)
+        {
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"playlist" ofType:@"plist"];
+            playlist = [NSDictionary dictionaryWithContentsOfFile:path];
+        }
+        
+        // Populate playlist with available items
+        if (playlist != nil)
+            [self.playlist addEntriesFromDictionary:playlist];
     }
     
     return self;
@@ -73,26 +81,39 @@
 }
 
 
-- (void)createSystemSoundForKey:(NSString *)key
+- (BOOL)createSystemSoundForKey:(NSString *)key
 {
-    // Return if sound ID has been created
+    // Return yes immediately if sound ID has been created
     if ([self.sounds objectForKey:key] != nil)
-        return;
+        return YES;
     
     NSString *filename = [self.playlist objectForKey:key];
+    
+    // Return no if key does not exist in the playlist
+    if (filename == nil)
+        return NO;
+    
     NSString *resource = [filename stringByDeletingPathExtension];
     NSString *type = [[filename componentsSeparatedByString:@"."] lastObject];
     NSString *path = [[NSBundle mainBundle] pathForResource:resource ofType:type];
+    
+    // Return no if the audio resource could not be located
+    if (path == nil)
+        return NO;
     
     CFURLRef URL = (CFURLRef)[NSURL fileURLWithPath:path];
     SystemSoundID systemSoundID = NSNotFound;
     AudioServicesCreateSystemSoundID(URL, &systemSoundID);
     
+    // Store system sound ID if created successfully
     if (systemSoundID != NSNotFound)
     {
         NSNumber *sound = [NSNumber numberWithUnsignedLong:systemSoundID];
         [self.sounds setObject:sound forKey:key];
+        return YES;
     }
+    
+    return NO;
 }
 
 

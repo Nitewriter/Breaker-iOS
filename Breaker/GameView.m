@@ -74,7 +74,7 @@ float const kGameViewPaddleDragTilt = 1.0;
         _paddleTranslation = _playerPaddle.center;
         
         // Load audio for collisions
-        _audioPlayer = [[GVAudioPlayer alloc] init];
+        _audioPlayer = [[GVAudioPlayer alloc] initWithPlaylist:nil];
         [self.audioPlayer loadPlaylist];
     }
     

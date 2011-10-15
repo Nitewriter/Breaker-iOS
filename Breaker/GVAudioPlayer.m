@@ -69,8 +69,39 @@
 
 #pragma mark - Class methods
 
+- (NSInteger)numberOfPlaylistReferences
+{
+    return [[self.playlist allKeys] count];
+}
+
+
+- (NSInteger)numberOfSounds
+{
+    return [[self.sounds allKeys] count];
+}
+
+
+- (BOOL)isPlaylistLoaded
+{
+    return (self.numberOfPlaylistReferences == self.numberOfSounds);
+}
+
+
+- (NSArray *)unloadedKeys
+{
+    NSMutableArray *allKeys = [NSMutableArray arrayWithCapacity:0];
+    [allKeys addObjectsFromArray:[self.playlist allKeys]];
+    [allKeys removeObjectsInArray:[self.sounds allKeys]];
+    
+    return allKeys;
+}
+
+
 - (void)loadPlaylist
 {
+    if (self.playlistLoaded)
+        return;
+    
     NSArray *keys = [self.playlist allKeys];
     
     for (NSString *key in keys)
@@ -95,6 +126,29 @@
         return (SystemSoundID)[sound unsignedLongValue];
     
     return NSNotFound;
+}
+
+
+- (BOOL)createSystemSoundWithName:(NSString *)filename forKey:(NSString *)key
+{
+    // Return no if nil values received
+    if (filename == nil || key == nil)
+        return NO;
+    
+    // Check for existence of audio reference in the playlist
+    if ([self.playlist objectForKey:key] != nil)
+    {
+        // Check filename for match
+        if ([[self.playlist objectForKey:key] isEqualToString:filename])
+            return [self createSystemSoundForKey:key];
+        
+        // Unload current audio resource
+        [self removeSystemSoundForKey:key];
+    }
+    
+    // Set/Replace the audio reference in the playlist
+    [self.playlist setObject:filename forKey:key];
+    return [self createSystemSoundForKey:key];
 }
 
 
